@@ -3,7 +3,7 @@ DFPlayer - A Mini MP3 Player For ESP-IDF.
 
 ESP32 has I2S output function.   
 By using ESP-ADF and I2S amplifier, MP3 files can be played.   
-However, ESP-ADF is esoteric and depends on a specific version of ESP-IDF.   
+However, ESP-ADF is esoteric and also depends on a specific version of ESP-IDF.   
 I made this for the purpose of playing MP3 files more easily.   
 
 I ported from [here](https://github.com/DFRobot/DFRobotDFPlayerMini) and used [this](https://github.com/nopnop2002/esp-idf-serial) component.
