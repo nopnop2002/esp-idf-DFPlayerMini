@@ -65,6 +65,15 @@ Typical circuit
 Typical circuit   
 ![ESP32-DFRobot-DFPlayer-Mini-2](https://user-images.githubusercontent.com/6020549/213993306-7e591d0a-bfb6-42ce-bd71-62b3feef8a9c.jpg)
 
+# Micro SD Card
+I've tried several different brands of SD cards and some don't work.   
+I get this error.   
+I fixed it by replacing the SD card with another brand.   
+```
+received:7e ff 6 3b 0 0 2 fe be ef
+Card Removed!
+```
+
 # About sample mp3 data
 I borrowed from here.(Japanese site)   
 https://otologic.jp/free/se/school_bell01.html#google_vignette
