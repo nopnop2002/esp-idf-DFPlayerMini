@@ -12,8 +12,7 @@ I ported from [here](https://github.com/DFRobot/DFRobotDFPlayerMini) and used [t
 ESP-IDF V4.4/V5.0.   
 
 # Hardware requirements
-FN-M16P Embedded MP3 Audio Module.   
-It's called DFPlayerMini.   
+DFPlayer - A Mini MP3 Player For Arduino https://www.dfrobot.com/index.php?route=product/product&product_id=1121   
 
 # Installation
 Copy all the contents of mp3Data to the SD card.   
