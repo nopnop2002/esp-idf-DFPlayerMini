@@ -55,7 +55,7 @@ Typical circuit
 # Wiring with an external amplifier
 |ESP32||DFPlayerMini||AMP|
 |:-:|:-:|:-:|:-:|:-:|
-|3.3V|--|VCC|||
+|3.3V|--|VCC|--|VCC|
 |GPIO4|--|RX(*)|||
 |GPIO5|--|TX(*)|||
 |||DAC_R|--|Right Channl Input|
