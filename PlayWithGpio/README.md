@@ -9,7 +9,7 @@ This example requires GPIO number.
 
 Initial value:   
 ||Number|State|
-|:-:|:-:|:-:|:-:|
+|:-:|:-:|:-:|
 |ESP32|GPIO0|PullUp|
 |ESP32S2|GPIO0|PullUp|
 |ESP32S3|GPIO0|PullUp|
