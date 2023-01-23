@@ -13,6 +13,8 @@
 #include "esp_wifi.h"
 #include "esp_event.h"
 #include "nvs_flash.h"
+#include "mdns.h"
+#include "lwip/dns.h"
 
 #include "DFRobotDFPlayerMini.h"
 
@@ -122,6 +124,19 @@ void wifi_init_sta(void)
 	vEventGroupDelete(s_wifi_event_group);
 }
 
+void initialise_mdns(void)
+{
+	//initialize mDNS
+	ESP_ERROR_CHECK( mdns_init() );
+	//set mDNS hostname (required if you want to advertise services)
+	ESP_ERROR_CHECK( mdns_hostname_set(CONFIG_MDNS_HOSTNAME) );
+	ESP_LOGI(TAG, "mdns hostname set to: [%s]", CONFIG_MDNS_HOSTNAME);
+
+#if 0
+	//set default mDNS instance name
+	ESP_ERROR_CHECK( mdns_instance_name_set("ESP32 with mDNS") );
+#endif
+}
 
 void play(void *pvParameters)
 {
@@ -194,6 +209,9 @@ void app_main()
 
     ESP_LOGI(TAG, "ESP_WIFI_MODE_STA");
     wifi_init_sta();
+
+	// Initialize mDNS
+	initialise_mdns();
 
 	/* Create Queue */
 	xQueueKey = xQueueCreate( 1, sizeof(uint16_t) );

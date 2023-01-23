@@ -19,4 +19,9 @@ menu "Application Configuration"
 			help
 				Set the Maximum retry to avoid station reconnecting to the AP unlimited when the AP is really inexistent.
 
+		config MDNS_HOSTNAME
+			string "mDNS Hostname"
+			default "esp32-player"
+			help
+				The mDNS host name used by the ESP32.
 endmenu
