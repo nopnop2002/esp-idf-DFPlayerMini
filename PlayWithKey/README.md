@@ -1,6 +1,6 @@
 # PlayWithKey
 
-Use the keyboard to operate the player.   
+Play music using the keyboard.   
 - p:Play   
 - s:Stop   
 - n:Next   
