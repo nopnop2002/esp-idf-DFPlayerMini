@@ -1,0 +1,39 @@
+menu "Application configuration"
+
+	config GPIO_RANGE_MAX
+		int
+		default 33 if IDF_TARGET_ESP32
+		default 46 if IDF_TARGET_ESP32S2
+		default 48 if IDF_TARGET_ESP32S3
+		default 18 if IDF_TARGET_ESP32C2
+		default 19 if IDF_TARGET_ESP32C3
+
+	config GPIO_INPUT
+		int "GPIO number (GPIOxx) for input"
+		range 0 GPIO_RANGE_MAX
+		default 0 if IDF_TARGET_ESP32
+		default 0 if IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
+		default 9 if IDF_TARGET_ESP32C2 || IDF_TARGET_ESP32C3
+		help
+			GPIO number (IOxx) for Input.
+			Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to Button.
+
+	choice GPIO_INITIAL
+		prompt "GPIO Initial state"
+		default GPIO_PULLUP
+		help
+			Select initial state of GPIO.
+
+		config GPIO_PULLUP
+			bool "GPIO_PULLUP"
+			help
+				The initial state of GPIO is Pull-UP.
+
+		config GPIO_PULLDOWN
+			bool "GPIO_PULLDOWN"
+			help
+				The initial state of GPIO is Pull-Down.
+
+	endchoice
+
+endmenu
