@@ -1,0 +1,30 @@
+menu "DFPlayerMini Configuration"
+
+	config GPIO_RANGE_MAX
+		int
+		default 33 if IDF_TARGET_ESP32
+		default 46 if IDF_TARGET_ESP32S2
+		default 48 if IDF_TARGET_ESP32S3
+		default 18 if IDF_TARGET_ESP32C2
+		default 19 if IDF_TARGET_ESP32C3
+
+
+	config TX_GPIO
+		int "TX GPIO number"
+		range 0 GPIO_RANGE_MAX
+		default 4
+		help
+			GPIO number (IOxx) to CTX.
+			Some GPIOs are used for other purposes (flash connections, etc.).
+			GPIOs 35-39 are input-only so cannot be used as outputs.
+
+	config RX_GPIO
+		int "RX GPIO number"
+		range 0 GPIO_RANGE_MAX
+		default 5
+		help
+			GPIO number (IOxx) to CRX.
+			Some GPIOs are used for other purposes (flash connections, etc.).
+			GPIOs 35-39 are input-only so cannot be used as outputse
+
+endmenu
