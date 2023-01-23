@@ -64,3 +64,6 @@ Typical circuit
 Typical circuit   
 ![ESP32-DFRobot-DFPlayer-Mini-2](https://user-images.githubusercontent.com/6020549/213993306-7e591d0a-bfb6-42ce-bd71-62b3feef8a9c.jpg)
 
+# About sample mp3 data
+I borrowed from here.   
+https://otologic.jp/free/se/school_bell01.html#google_vignette
