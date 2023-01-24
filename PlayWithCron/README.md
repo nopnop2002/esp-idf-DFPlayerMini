@@ -1,7 +1,6 @@
 # PlayWithCron
 
-
-Play music periodically.   
+Play music periodically according to crontab.   
 This example requires WiFi and NTP Server.   
 
 ![config-top](https://user-images.githubusercontent.com/6020549/214195753-18010318-4560-42fe-8aed-239fa8f8b7f6.jpg)
