@@ -224,7 +224,7 @@ void app_main()
     sprintf(cparam0, IPSTR, IP2STR(&ip_info.ip));
 
 	/* Create task */
-	xTaskCreate(http_server, "MQTT", 1024*4, (void *)cparam0, 2, NULL);
+	xTaskCreate(http_server, "HTTP", 1024*4, (void *)cparam0, 2, NULL);
 	xTaskCreate(play, "PLAY", 1024*4, NULL, 2, NULL);
 
     // Wait for the task to start, because cparam0 is discarded.
