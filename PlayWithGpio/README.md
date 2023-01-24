@@ -17,6 +17,6 @@ Initial value:
 |ESP32C3|GPIO9|PullUp|
 
 This GPIO is used to determine the boot mode.   
-This values are always pullups.   
+For Flash Boot Mode, this value is always a pull-up.   
 Press the ```Boot``` button on the development board to start playing.
 
