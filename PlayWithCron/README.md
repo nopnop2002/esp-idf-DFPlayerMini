@@ -32,6 +32,7 @@ In Linux you specify the command, but in this project you specify the track numb
 __Note:__   
 This sample does not judge even if the same time overlaps.   
 If the same time overlaps, the later definition in the file takes effect.   
+You have to define it considering the playing time.   
 
 ```
 # Edit this file to introduce tasks to be run by cron.
