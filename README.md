@@ -69,6 +69,7 @@ Typical circuit
 I've tried several different brands of SD cards and some don't work.   
 I get this error.   
 I fixed it by replacing the SD card with another brand.   
+It's probably related to the power consumption of the SD card.   
 ```
 received:7e ff 6 3b 0 0 2 fe be ef
 Card Removed!
