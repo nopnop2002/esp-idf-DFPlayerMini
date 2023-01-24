@@ -1,0 +1,42 @@
+menu "Application Configuration"
+
+	menu "WiFi Setting"
+
+		config ESP_WIFI_SSID
+			string "WiFi SSID"
+			default "myssid"
+			help
+				SSID (network name) to connect to.
+
+		config ESP_WIFI_PASSWORD
+			string "WiFi Password"
+			default "mypassword"
+			help
+				WiFi password (WPA or WPA2) to use.
+
+		config ESP_MAXIMUM_RETRY
+			int "Maximum retry"
+			default 5
+			help
+				Set the Maximum retry to avoid station reconnecting to the AP unlimited when the AP is really inexistent.
+
+	endmenu
+
+	menu "NTP Setting"
+
+		config NTP_SERVER
+			string "Hostname for NTP Server"
+			default "pool.ntp.org"
+			help
+				Hostname for NTP Server.
+
+		config LOCAL_TIMEZONE
+			int "Your local timezone"
+			range -23 23
+			default 0
+			help
+				Your local timezone.  When it is 0, Greenwich Mean Time.
+
+	endmenu
+
+endmenu
