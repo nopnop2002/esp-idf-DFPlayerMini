@@ -46,7 +46,7 @@ idf.py flash
 
 (*) You can change it using menuconfig.   
 
-__This module is very vulnerable to noise.__   
+__The built-in amplifier of this module is very sensitive to noise.__   
 
 Typical circuit   
 ![ESP32-DFRobot-DFPlayer-Mini-1](https://user-images.githubusercontent.com/6020549/213993262-ed8a3f7a-add9-48e2-b618-0d4ecce669bc.jpg)
