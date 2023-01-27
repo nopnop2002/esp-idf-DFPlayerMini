@@ -1,11 +1,7 @@
-/* LwIP SNTP example
-
-	 This example code is in the Public Domain (or CC0 licensed, at your option.)
-
-	 Unless required by applicable law or agreed to in writing, this
-	 software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-	 CONDITIONS OF ANY KIND, either express or implied.
-*/
+/* The example of DFPlayerMini for ESP-IDF
+ *
+ * This sample code is in the public domain.
+ */
 
 #include <stdio.h>
 #include <inttypes.h>
@@ -321,43 +317,43 @@ esp_err_t build_table(char *fileName, CRON_t **tables, int16_t *ntable) {
 
 void play(void *pvParameters)
 {
-    ESP_LOGI(pcTaskGetName(0), "Start");
+	ESP_LOGI(pcTaskGetName(0), "Start");
 
-    while(1) {
-        bool ret = DF_begin(CONFIG_TX_GPIO, CONFIG_RX_GPIO, true);
-        ESP_LOGI(TAG, "DF_begin=%d", ret);
-        if (ret) break;
-        vTaskDelay(200);
-    }
-    ESP_LOGI(TAG, "DFPlayer Mini online.");
-    DF_volume(30); //Set volume value. From 0 to 30
+	while(1) {
+		bool ret = DF_begin(CONFIG_TX_GPIO, CONFIG_RX_GPIO, true);
+		ESP_LOGI(TAG, "DF_begin=%d", ret);
+		if (ret) break;
+		vTaskDelay(200);
+	}
+	ESP_LOGI(TAG, "DFPlayer Mini online.");
+	DF_volume(30); //Set volume value. From 0 to 30
 
-    uint16_t key;
-    while(1) {
-        // Wait key input
-        ESP_LOGI(pcTaskGetName(0),"Waitting ....");
-        xQueueReceive(xQueueKey, &key, portMAX_DELAY);
-        ESP_LOGI(pcTaskGetName(0), "key=0x%x", key);
+	uint16_t key;
+	while(1) {
+		// Wait key input
+		ESP_LOGI(pcTaskGetName(0),"Waitting ....");
+		xQueueReceive(xQueueKey, &key, portMAX_DELAY);
+		ESP_LOGI(pcTaskGetName(0), "key=0x%x", key);
 
-        // Show DFPlayer event
-        while(1) {
-            if (DF_waitAvailable(1000)) {
-                uint8_t type = DF_readType();
-                int value = DF_read();
-                //Print the detail message from DFPlayer to handle different errors and states.
-                DF_printDetail(type, value);
-            } else {
-                break;
-            }
-        }
+		// Show DFPlayer event
+		while(1) {
+			if (DF_waitAvailable(1000)) {
+				uint8_t type = DF_readType();
+				int value = DF_read();
+				//Print the detail message from DFPlayer to handle different errors and states.
+				DF_printDetail(type, value);
+			} else {
+				break;
+			}
+		}
 
-        if (key >= 0x31 && key <= 0x39) { // '1' - '9'
-            DF_play(key-0x30); //Play the mp3
-        }
-    }
+		if (key >= 0x31 && key <= 0x39) { // '1' - '9'
+			DF_play(key-0x30); //Play the mp3
+		}
+	}
 
-    /* Never reach */
-    vTaskDelete( NULL );
+	/* Never reach */
+	vTaskDelete( NULL );
 }
 
 void app_main(void)
@@ -408,12 +404,12 @@ void app_main(void)
 	sprintf(fileName, "%s/crontab", base_path);
 	ret = build_table(fileName, &crontab, &lcrontab);
 
-    // Create Queue
-    xQueueKey = xQueueCreate( 1, sizeof(uint16_t) );
-    configASSERT( xQueueKey );
+	// Create Queue
+	xQueueKey = xQueueCreate( 1, sizeof(uint16_t) );
+	configASSERT( xQueueKey );
 
-    // Create task
-    xTaskCreate(play, "PLAY", 1024*4, NULL, 2, NULL);
+	// Create task
+	xTaskCreate(play, "PLAY", 1024*4, NULL, 2, NULL);
 
 	// Start main loop
 	cron_expr expr;
