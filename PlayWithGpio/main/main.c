@@ -19,44 +19,44 @@ QueueHandle_t xQueueKey;
 
 void gpio(void *pvParameter)
 {
-    ESP_LOGI(pcTaskGetName(0), "Start CONFIG_GPIO_INPUT=%d", CONFIG_GPIO_INPUT);
+	ESP_LOGI(pcTaskGetName(0), "Start CONFIG_GPIO_INPUT=%d", CONFIG_GPIO_INPUT);
 
-    // set the GPIO as a input
-    gpio_reset_pin(CONFIG_GPIO_INPUT);
-    gpio_set_direction(CONFIG_GPIO_INPUT, GPIO_MODE_DEF_INPUT);
+	// set the GPIO as a input
+	gpio_reset_pin(CONFIG_GPIO_INPUT);
+	gpio_set_direction(CONFIG_GPIO_INPUT, GPIO_MODE_DEF_INPUT);
 
 #if CONFIG_GPIO_PULLUP
-    ESP_LOGI(pcTaskGetName(0), "GPIO%d is PULL UP", CONFIG_GPIO_INPUT);
-    int push = 0;
-    int release = 1;
+	ESP_LOGI(pcTaskGetName(0), "GPIO%d is PULL UP", CONFIG_GPIO_INPUT);
+	int push = 0;
+	int release = 1;
 #endif
 #if CONFIG_GPIO_PULLDOWN
-    ESP_LOGI(pcTaskGetName(0), "GPIO%d is PULL DOWN", CONFIG_GPIO_INPUT);
-    int push = 1;
-    int release = 0;
+	ESP_LOGI(pcTaskGetName(0), "GPIO%d is PULL DOWN", CONFIG_GPIO_INPUT);
+	int push = 1;
+	int release = 0;
 #endif
-    ESP_LOGI(pcTaskGetName(0), "push=%d release=%d", push, release);
+	ESP_LOGI(pcTaskGetName(0), "push=%d release=%d", push, release);
 
 	uint16_t key = 0x6E;
-    while(1) {
-        int level = gpio_get_level(CONFIG_GPIO_INPUT);
-        if (level == push) {
-            ESP_LOGI(pcTaskGetName(0), "Push Button");
-            while(1) {
-                level = gpio_get_level(CONFIG_GPIO_INPUT);
-                if (level == release) break;
-                vTaskDelay(1);
-            }
-            ESP_LOGI(pcTaskGetName(0), "Release Button");
-            if (xQueueSend(xQueueKey, &key, 10) != pdPASS) {
-                ESP_LOGE(pcTaskGetName(0), "xQueueSend fail");
-            }
-        }
-        vTaskDelay(1);
-    }
+	while(1) {
+		int level = gpio_get_level(CONFIG_GPIO_INPUT);
+		if (level == push) {
+			ESP_LOGI(pcTaskGetName(0), "Push Button");
+			while(1) {
+				level = gpio_get_level(CONFIG_GPIO_INPUT);
+				if (level == release) break;
+				vTaskDelay(1);
+			}
+			ESP_LOGI(pcTaskGetName(0), "Release Button");
+			if (xQueueSend(xQueueKey, &key, 10) != pdPASS) {
+				ESP_LOGE(pcTaskGetName(0), "xQueueSend fail");
+			}
+		}
+		vTaskDelay(1);
+	}
 
-    /* Never reach */
-    vTaskDelete( NULL );
+	/* Never reach */
+	vTaskDelete( NULL );
 }
 
 void play(void *pvParameters)
