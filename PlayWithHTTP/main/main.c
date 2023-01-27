@@ -199,16 +199,16 @@ void http_server(void *pvParameters);
 
 void app_main()
 {
-    // Initialize NVS
-    esp_err_t ret = nvs_flash_init();
-    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
-        ESP_ERROR_CHECK(nvs_flash_erase());
-        ret = nvs_flash_init();
-    }
-    ESP_ERROR_CHECK(ret);
+	// Initialize NVS
+	esp_err_t ret = nvs_flash_init();
+	if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+		ESP_ERROR_CHECK(nvs_flash_erase());
+		ret = nvs_flash_init();
+	}
+	ESP_ERROR_CHECK(ret);
 
-    ESP_LOGI(TAG, "ESP_WIFI_MODE_STA");
-    wifi_init_sta();
+	ESP_LOGI(TAG, "ESP_WIFI_MODE_STA");
+	wifi_init_sta();
 
 	// Initialize mDNS
 	initialise_mdns();
@@ -217,17 +217,17 @@ void app_main()
 	xQueueKey = xQueueCreate( 1, sizeof(uint16_t) );
 	configASSERT( xQueueKey );
 
-    /* Get the local IP address */
-    esp_netif_ip_info_t ip_info;
-    ESP_ERROR_CHECK(esp_netif_get_ip_info(esp_netif_get_handle_from_ifkey("WIFI_STA_DEF"), &ip_info));
-    char cparam0[64];
-    sprintf(cparam0, IPSTR, IP2STR(&ip_info.ip));
+	/* Get the local IP address */
+	esp_netif_ip_info_t ip_info;
+	ESP_ERROR_CHECK(esp_netif_get_ip_info(esp_netif_get_handle_from_ifkey("WIFI_STA_DEF"), &ip_info));
+	char cparam0[64];
+	sprintf(cparam0, IPSTR, IP2STR(&ip_info.ip));
 
 	/* Create task */
 	xTaskCreate(http_server, "HTTP", 1024*4, (void *)cparam0, 2, NULL);
 	xTaskCreate(play, "PLAY", 1024*4, NULL, 2, NULL);
 
-    // Wait for the task to start, because cparam0 is discarded.
-    vTaskDelay(10);
+	// Wait for the task to start, because cparam0 is discarded.
+	vTaskDelay(10);
 }
 
