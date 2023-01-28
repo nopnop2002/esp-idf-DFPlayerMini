@@ -77,4 +77,5 @@ Card Removed!
 
 # About sample mp3 data
 I borrowed from here.(Japanese site)   
+This is a typical alarm used in elementary and junior high schools in Japan to announce the start and end of classes.   
 https://otologic.jp/free/se/school_bell01.html#google_vignette
