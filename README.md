@@ -38,8 +38,8 @@ idf.py flash
 |ESP32||DFPlayerMini||Speker|
 |:-:|:-:|:-:|:-:|:-:|
 |3.3V|--|VCC|||
-|GPIO4|--|RX(*)|||
-|GPIO5|--|TX(*)|||
+|GPIO4(*)|--|RX|||
+|GPIO5(*)|--|TX|||
 |||SPK+|--|Speaker+|
 |GND|--|GND|||
 |||SPK-|--|Speaker-|
@@ -56,8 +56,8 @@ Typical circuit
 |ESP32||DFPlayerMini||AMP|
 |:-:|:-:|:-:|:-:|:-:|
 |3.3V|--|VCC|--|VCC|
-|GPIO4|--|RX(*)|||
-|GPIO5|--|TX(*)|||
+|GPIO4(*)|--|RX|||
+|GPIO5(*)|--|TX|||
 |||DAC_R|--|Right Channl Input|
 |||DAC_I|--|Left Channl Input|
 |GND|--|GND|--|GND|
