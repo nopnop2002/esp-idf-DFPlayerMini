@@ -29,7 +29,7 @@ Supports cron expressions with seconds field.
 ```
 
 __Note:__   
-This sample does not judge even if the same time overlaps.   
+This sample does not consider overlapping times.   
 If the same time overlaps, the later definition in the file takes effect.   
 You have to define it considering the playing time.   
 
