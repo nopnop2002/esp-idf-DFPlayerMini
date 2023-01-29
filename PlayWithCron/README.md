@@ -24,11 +24,10 @@ Supports cron expressions with seconds field.
       |  |  |  |  |  +------------  day of week (0 - 6) (Sunday to Saturday;
       |  |  |  |  |  |                                   7 is also Sunday on some systems)
       |  |  |  |  |  |  +---------  track number in SD
-      |  |  |  |  |  |  |
+      |  |  |  |  |  |  |           In Linux you specify the command, but in this project you specify the track number.   
       *  *  *  *  *  *  task
 ```
 
-In Linux you specify the command, but in this project you specify the track number is SD.   
 __Note:__   
 This sample does not judge even if the same time overlaps.   
 If the same time overlaps, the later definition in the file takes effect.   
