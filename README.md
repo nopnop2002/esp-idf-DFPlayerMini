@@ -80,6 +80,35 @@ I borrowed from here.(Japanese site)
 This is a typical alarm used in elementary and junior high schools in Japan to announce the start and end of classes.   
 https://otologic.jp/free/se/school_bell01.html#google_vignette
 
+# API
+```
+//----Mp3 play----
+DF_next();  //Play next mp3
+DF_previous();  //Play previous mp3
+DF_play(1);  //Play the first mp3
+DF_loop(1);  //Loop the first mp3
+DF_pause();  //pause the mp3
+DF_start();  //start the mp3 from the pause
+DF_playFolder(15, 4);  //play specific mp3 in SD:/15/004.mp3; Folder Name(1~99); File Name(1~255)
+DF_enableLoopAll(); //loop all mp3 files.
+DF_disableLoopAll(); //stop loop all mp3 files.
+DF_playMp3Folder(4); //play specific mp3 in SD:/MP3/0004.mp3; File Name(0~65535)
+DF_advertise(3); //advertise specific mp3 in SD:/ADVERT/0003.mp3; File Name(0~65535)
+DF_stopAdvertise(); //stop advertise
+DF_playLargeFolder(2, 999); //play specific mp3 in SD:/02/004.mp3; Folder Name(1~10); File Name(1~1000)
+DF_loopFolder(5); //loop all mp3 files in folder SD:/05.
+DF_randomAll(); //Random play all the mp3.
+DF_enableLoop(); //enable loop.
+DF_disableLoop(); //disable loop.
 
-# About DFPlayer Mini
-https://www.dfrobot.com/wiki/index.php/DFPlayer_Mini_SKU:DFR0299
+//----Read imformation----
+printf("%d",DF_readState()); //read mp3 state
+printf("%d",DF_readVolume()); //read current volume
+printf("%d",DF_readEQ()); //read EQ setting
+printf("%d",DF_readFileCounts()); //read all file counts in SD card
+printf("%d",DF_readCurrentFileNumber()); //read current play file number
+printf("%d",DF_readFileCountsInFolder(3)); //read fill counts in folder SD:/03
+```
+
+# For more info
+https://www.dfrobot.com/wiki/index.php/DFPlayer_Mini_SKU:DFR0299   
