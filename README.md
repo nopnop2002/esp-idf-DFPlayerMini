@@ -79,3 +79,7 @@ Card Removed!
 I borrowed from here.(Japanese site)   
 This is a typical alarm used in elementary and junior high schools in Japan to announce the start and end of classes.   
 https://otologic.jp/free/se/school_bell01.html#google_vignette
+
+
+# About DFPlayer Mini
+https://www.dfrobot.com/wiki/index.php/DFPlayer_Mini_SKU:DFR0299
