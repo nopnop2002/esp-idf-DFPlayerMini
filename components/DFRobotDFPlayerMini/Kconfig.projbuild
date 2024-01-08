@@ -7,7 +7,8 @@ menu "DFPlayerMini Configuration"
 		default 48 if IDF_TARGET_ESP32S3
 		default 18 if IDF_TARGET_ESP32C2
 		default 19 if IDF_TARGET_ESP32C3
-
+		default 30 if IDF_TARGET_ESP32C6
+		default 27 if IDF_TARGET_ESP32H2
 
 	config TX_GPIO
 		int "TX GPIO number"
