@@ -13,7 +13,7 @@ I ported from [here](https://github.com/DFRobot/DFRobotDFPlayerMini) and used [t
 # Software requirements
 ESP-IDF V4.4/V5.x.   
 ESP-IDF V5.0 is required when using ESP32C2.   
-ESP-IDF V5.1 is required when using ESP32C6.   
+ESP-IDF V5.1 is required when using ESP32C6 and ESP32H2.   
 
 # Hardware requirements
 DFPlayer - A Mini MP3 Player For Arduino https://www.dfrobot.com/index.php?route=product/product&product_id=1121   
