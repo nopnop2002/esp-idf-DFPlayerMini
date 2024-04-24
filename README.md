@@ -16,7 +16,8 @@ ESP-IDF V5.0 is required when using ESP32C2.
 ESP-IDF V5.1 is required when using ESP32C6 and ESP32H2.   
 
 # Hardware requirements
-DFPlayer - A Mini MP3 Player For Arduino https://www.dfrobot.com/index.php?route=product/product&product_id=1121   
+DFPlayer - A Mini MP3 Player For Arduino.   
+https://www.dfrobot.com/index.php?route=product/product&product_id=1121   
 
 # Installation
 Copy all the contents of mp3Data to the SD card.   
