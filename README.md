@@ -25,6 +25,7 @@ Insert the SD card into the player.
 
 ```Shell
 git clone https://github.com/nopnop2002/esp-idf-DFPlayerMini
+cp esp-idf-DFPlayerMini/mp3Data/* your_sd_card
 cd esp-idf-DFPlayerMini/GetStarted
 idf.py menuconfig
 idf.py flash
