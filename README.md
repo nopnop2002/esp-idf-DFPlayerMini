@@ -138,5 +138,7 @@ https://github.com/arendst/Tasmota/discussions/11737
 https://forum.arduino.cc/t/df-player-warning/952842   
 https://discourse.voss.earth/t/probleme-mit-dem-dfplayer-mini/12203   
 
+![MP3_CHIP](https://github.com/nopnop2002/esp-idf-DFPlayerMini/assets/6020549/8809b4e9-6765-41c7-8c71-5b413f8111da)
+
 # For more info
 https://www.dfrobot.com/wiki/index.php/DFPlayer_Mini_SKU:DFR0299   
