@@ -116,5 +116,27 @@ printf("%d",DF_readCurrentFileNumber()); //read current play file number
 printf("%d",DF_readFileCountsInFolder(3)); //read fill counts in folder SD:/03
 ```
 
+# Document
+Document is [here](https://picaxe.com/docs/spe033.pdf).   
+
+# MP3 Chip
+There are many variations of the MP3 IC installed in DF Player Mini.   
+I own three DF Players, two are JC AA18 and one is YX5200.   
+JC AA18 is very stable.   
+But YX5200 give me this error sometime:
+```
+sending:7e ff 6 6 0 0 1e fe d7 ef
+
+sending:7e ff 6 3 0 0 1 fe f7 ef
+received:7e ff 6 40 0 0 4 fe b7 ef
+DFPlayerError:Check Sum Not Match
+```
+
+In addition to this, there are YM5200, YM5300, MH2024K, GD3200B, etc.   
+There are also articles like this.   
+https://github.com/arendst/Tasmota/discussions/11737   
+https://forum.arduino.cc/t/df-player-warning/952842   
+https://discourse.voss.earth/t/probleme-mit-dem-dfplayer-mini/12203   
+
 # For more info
 https://www.dfrobot.com/wiki/index.php/DFPlayer_Mini_SKU:DFR0299   
