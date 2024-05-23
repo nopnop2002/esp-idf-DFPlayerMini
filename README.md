@@ -116,9 +116,6 @@ printf("%d",DF_readCurrentFileNumber()); //read current play file number
 printf("%d",DF_readFileCountsInFolder(3)); //read fill counts in folder SD:/03
 ```
 
-# Document
-Document is [here](https://picaxe.com/docs/spe033.pdf).   
-
 # MP3 Chip
 There are many variations of the MP3 IC installed in DF Player Mini.   
 I own three DF Players, two with JC AA18 and one with YX5200.   
@@ -141,4 +138,6 @@ https://discourse.voss.earth/t/probleme-mit-dem-dfplayer-mini/12203
 ![MP3_CHIP](https://github.com/nopnop2002/esp-idf-DFPlayerMini/assets/6020549/8809b4e9-6765-41c7-8c71-5b413f8111da)
 
 # For more info
-https://www.dfrobot.com/wiki/index.php/DFPlayer_Mini_SKU:DFR0299   
+Document is [here](https://picaxe.com/docs/spe033.pdf).   
+
+Product information is [here](https://www.dfrobot.com/wiki/index.php/DFPlayer_Mini_SKU:DFR0299).   
