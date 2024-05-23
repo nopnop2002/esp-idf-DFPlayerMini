@@ -122,7 +122,7 @@ Document is [here](https://picaxe.com/docs/spe033.pdf).
 # MP3 Chip
 There are many variations of the MP3 IC installed in DF Player Mini.   
 I own three DF Players, two with JC AA18 and one with YX5200.   
-JC AA18 is very stable.   
+JC AA18 works very stable.   
 But YX5200 give me this error sometime:
 ```
 sending:7e ff 6 6 0 0 1e fe d7 ef
