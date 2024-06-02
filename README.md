@@ -19,6 +19,36 @@ ESP-IDF V5.1 is required when using ESP32C6 and ESP32H2.
 DFPlayer - A Mini MP3 Player For Arduino.   
 https://www.dfrobot.com/index.php?route=product/product&product_id=1121   
 
+__Note for MP3-TF-16P__
+MP3-TF-16P is sold as DFPlayerMini, but it is a completely different product and is not compatible.   
+The two on the top are MP3-TF-16P.   
+This repository does not support MP3-TF-16P.   
+
+![MP3-TF-16P-1](https://github.com/nopnop2002/esp-idf-DFPlayerMini/assets/6020549/64b354cb-13f2-4d48-8845-12da14f7a587)
+![MP3-TF-16P-2](https://github.com/nopnop2002/esp-idf-DFPlayerMini/assets/6020549/d1866db4-2d55-4dd0-b627-748babe324b1)
+
+# MP3 Chip
+There are many variations of the MP3 IC installed in DF Player Mini.   
+I own three DF Players, two with JC AA18 and one with YX5200.   
+JC AA18 works very stable.   
+But YX5200 give me this error sometime:
+```
+sending:7e ff 6 6 0 0 1e fe d7 ef
+
+sending:7e ff 6 3 0 0 1 fe f7 ef
+received:7e ff 6 40 0 0 4 fe b7 ef
+DFPlayerError:Check Sum Not Match
+```
+
+In addition to this, there are YM5200, YM5300, MH2024K, GD3200B, etc.   
+There are also articles like this.   
+https://github.com/arendst/Tasmota/discussions/11737   
+https://forum.arduino.cc/t/df-player-warning/952842   
+https://discourse.voss.earth/t/probleme-mit-dem-dfplayer-mini/12203   
+
+![MP3_CHIP](https://github.com/nopnop2002/esp-idf-DFPlayerMini/assets/6020549/8809b4e9-6765-41c7-8c71-5b413f8111da)
+
+
 # Installation
 Copy all the contents of mp3Data to the SD card.   
 Insert the SD card into the player.   
@@ -116,26 +146,6 @@ printf("%d",DF_readCurrentFileNumber()); //read current play file number
 printf("%d",DF_readFileCountsInFolder(3)); //read fill counts in folder SD:/03
 ```
 
-# MP3 Chip
-There are many variations of the MP3 IC installed in DF Player Mini.   
-I own three DF Players, two with JC AA18 and one with YX5200.   
-JC AA18 works very stable.   
-But YX5200 give me this error sometime:
-```
-sending:7e ff 6 6 0 0 1e fe d7 ef
-
-sending:7e ff 6 3 0 0 1 fe f7 ef
-received:7e ff 6 40 0 0 4 fe b7 ef
-DFPlayerError:Check Sum Not Match
-```
-
-In addition to this, there are YM5200, YM5300, MH2024K, GD3200B, etc.   
-There are also articles like this.   
-https://github.com/arendst/Tasmota/discussions/11737   
-https://forum.arduino.cc/t/df-player-warning/952842   
-https://discourse.voss.earth/t/probleme-mit-dem-dfplayer-mini/12203   
-
-![MP3_CHIP](https://github.com/nopnop2002/esp-idf-DFPlayerMini/assets/6020549/8809b4e9-6765-41c7-8c71-5b413f8111da)
 
 # For more info
 Document is [here](https://picaxe.com/docs/spe033.pdf).   
