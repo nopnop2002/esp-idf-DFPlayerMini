@@ -19,7 +19,7 @@ ESP-IDF V5.1 is required when using ESP32C6 and ESP32H2.
 DFPlayer - A Mini MP3 Player For Arduino.   
 https://www.dfrobot.com/index.php?route=product/product&product_id=1121   
 
-__Note for MP3-TF-16P__
+__Note for MP3-TF-16P__   
 MP3-TF-16P is sold as DFPlayerMini, but it is a completely different product and is not compatible.   
 The two on the top are MP3-TF-16P.   
 This repository does not support MP3-TF-16P.   
