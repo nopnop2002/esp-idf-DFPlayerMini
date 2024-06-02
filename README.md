@@ -20,7 +20,8 @@ DFPlayer - A Mini MP3 Player For Arduino.
 https://www.dfrobot.com/index.php?route=product/product&product_id=1121   
 
 __Note for MP3-TF-16P__   
-MP3-TF-16P is sold as DFPlayerMini, but it is a completely different product and is not compatible.   
+Many suppliers sell MP3-TF-16P as DFPlayerMin.   
+But it is a completely different product and is not compatible.   
 The two on the top are MP3-TF-16P.   
 This repository does not support MP3-TF-16P.   
 
