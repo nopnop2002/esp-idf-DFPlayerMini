@@ -12,16 +12,21 @@
 
 #include "DFRobotDFPlayerMini.h"
 
-#define TAG "MAIN"
+static const char *TAG = "MAIN";
 
 void app_main()
 {
 	bool debug = false;
-	while(1) {
-		bool ret = DF_begin(CONFIG_TX_GPIO, CONFIG_RX_GPIO, debug);
-		ESP_LOGI(TAG, "DF_begin=%d", ret);
-		if (ret) break;
-		vTaskDelay(200);
+#if CONFIG_DEBUG_MODE
+	debug = true;
+#endif
+	bool ret = DF_begin(CONFIG_TX_GPIO, CONFIG_RX_GPIO, true, true, debug);
+	ESP_LOGI(TAG, "DF_begin=%d", ret);
+	if (!ret) {
+		ESP_LOGE(TAG, "DFPlayer Mini not online.");
+		while(1) {
+			vTaskDelay(1);
+		}
 	}
 	ESP_LOGI(TAG, "DFPlayer Mini online.");
 
@@ -58,6 +63,6 @@ void app_main()
 			ESP_LOGI(TAG, "%s is 0x%x", text, value);
 		}
 	}
-
+	ESP_LOGI(TAG, "All Done.");
 }
 

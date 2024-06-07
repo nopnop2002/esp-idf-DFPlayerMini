@@ -12,7 +12,7 @@
 
 #include "DFRobotDFPlayerMini.h"
 
-#define TAG "MAIN"
+static const char *TAG = "MAIN";
 
 QueueHandle_t xQueueKey;
 
@@ -41,11 +41,17 @@ void play(void *pvParameters)
 {
 	ESP_LOGI(pcTaskGetName(0), "Start");
 
-	while(1) {
-		bool ret = DF_begin(CONFIG_TX_GPIO, CONFIG_RX_GPIO, true);
-		ESP_LOGI(TAG, "DF_begin=%d", ret);
-		if (ret) break;
-		vTaskDelay(200);
+	bool debug = false;
+#if CONFIG_DEBUG_MODE
+	debug = true;
+#endif
+	bool ret = DF_begin(CONFIG_TX_GPIO, CONFIG_RX_GPIO, true, true, debug);
+	ESP_LOGI(TAG, "DF_begin=%d", ret);
+	if (!ret) {
+		ESP_LOGE(TAG, "DFPlayer Mini not online.");
+		while(1) {
+			vTaskDelay(1);
+		}
 	}
 	ESP_LOGI(TAG, "DFPlayer Mini online.");
 	DF_volume(30); //Set volume value. From 0 to 30

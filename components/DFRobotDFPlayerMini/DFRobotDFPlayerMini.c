@@ -7,7 +7,7 @@
  * @copyright	GNU Lesser General Public License
  *
  * @author [Angelo](Angelo.qiao@dfrobot.com)
- * @version  V1.0.3
+ * @version  V1.0.6
  * @date  2016-12-07
  */
 
@@ -39,7 +39,6 @@ uint16_t _handleParameter;
 bool _isAvailable = false;
 bool _isSending = false;
 bool _isInstall = false;
-bool _isFeedback = false;
 bool _isDebug = false;
 
 void DF_setTimeOut(unsigned long timeOutDuration){
@@ -94,21 +93,8 @@ if (_isDebug) {
   _timeOutTimer = millis();
   _isSending = _sending[Stack_ACK];
   
-#if 0
   if (!_sending[Stack_ACK]) { //if the ack mode is off wait 10 ms after one transmition.
 	delay(10);
-  }
-#endif
-
-  if (_sending[Stack_ACK]) { //if the ack mode is off wait 10 ms after one transmition.
-	if (_sending[Stack_Command] < 0x42) {
-	  _isFeedback = false;
-	  DF_waitAvailable(100);
-	  ESP_LOGD(__FUNCTION__, "_isFeedback=%d", _isFeedback);
-	  if (_isFeedback == false) {
-		ESP_LOGE(__FUNCTION__, "No feedback from DF");
-	  }
-	}
   }
   ESP_LOGD(__FUNCTION__, "end");
 }
@@ -156,10 +142,7 @@ bool DF_waitAvailable(unsigned long duration){
   return true;
 }
 
-//bool DF_begin(int txd, int rxd, bool isACK, bool doReset, bool debug){
-bool DF_begin(int txd, int rxd,  bool debug){
-  bool isACK = false;
-  bool doReset = true;
+bool DF_begin(int txd, int rxd, bool isACK, bool doReset, bool debug){
   _isDebug = debug;
   if (_isInstall == false) {
 	serial_begin(9600, txd, rxd);
@@ -221,7 +204,6 @@ void DF_parseStack(){
   uint8_t handleCommand = *(_received + Stack_Command);
   if (handleCommand == 0x41) { //handle the 0x41 ack feedback as a spcecial case, in case the pollusion of _handleCommand, _handleParameter, and _handleType.
 	_isSending = false;
-	_isFeedback = true;
 	return;
   }
   

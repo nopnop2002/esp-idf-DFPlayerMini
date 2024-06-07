@@ -7,7 +7,7 @@
  * @copyright	GNU Lesser General Public License
  *
  * @author [Angelo](Angelo.qiao@dfrobot.com)
- * @version  V1.0.3
+ * @version  V1.0.6
  * @date  2016-12-07
  */
 
@@ -105,8 +105,7 @@
 
   uint8_t DF_readCommand();
   
-  //bool DF_begin(int txd, int rxd, bool isACK, bool doReset, bool debug);
-  bool DF_begin(int txd, int rxd, bool debug);
+  bool DF_begin(int txd, int rxd, bool isACK, bool doReset, bool debug);
   
   bool DF_waitAvailable(unsigned long duration);
   

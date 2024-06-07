@@ -21,8 +21,8 @@ https://www.dfrobot.com/index.php?route=product/product&product_id=1121
 
 __Note for MP3-TF-16P__   
 Many suppliers sell MP3-TF-16P as DFPlayerMini.   
-But it is a completely different product and is not compatible.   
-This repository does not support MP3-TF-16P.   
+However, since they are completely different products, they are not fully compatible.   
+This repository supports MP3-TF-16P, but I'm not sure if all features work.   
 The two on the top are MP3-TF-16P.   
 
 ![MP3-TF-16P-1](https://github.com/nopnop2002/esp-idf-DFPlayerMini/assets/6020549/64b354cb-13f2-4d48-8845-12da14f7a587)
@@ -68,8 +68,9 @@ idf.py flash
 
 ![config-top](https://user-images.githubusercontent.com/6020549/213992858-400a5d6d-0165-4394-9d3d-a84ef93270f1.jpg)
 
-![config-DFPlayerMini](https://user-images.githubusercontent.com/6020549/213992853-8a2c9466-00a2-4981-af66-aea1bfc5b76b.jpg)
+![config-app](https://github.com/nopnop2002/esp-idf-DFPlayerMini/assets/6020549/760ccda3-a4e2-4300-b7b7-387dee00f044)
 
+If you have problems, please enable debug mode.   
 
 # Wiring with built-in amplifier
 |ESP32||DFPlayerMini||Speker|

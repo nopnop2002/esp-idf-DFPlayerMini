@@ -16,7 +16,7 @@
 
 #include "DFRobotDFPlayerMini.h"
 
-#define TAG "MAIN"
+static const char *TAG = "MAIN";
 
 QueueHandle_t xQueueKey;
 
@@ -37,11 +37,11 @@ static void event_handler(void* arg, esp_event_base_t event_base, int32_t event_
 		esp_wifi_connect();
 	} else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED) {
 		if (s_retry_num < CONFIG_ESP_MAXIMUM_RETRY) {
-				esp_wifi_connect();
-				s_retry_num++;
-				ESP_LOGI(TAG, "retry to connect to the AP");
+			esp_wifi_connect();
+			s_retry_num++;
+			ESP_LOGI(TAG, "retry to connect to the AP");
 		} else {
-				xEventGroupSetBits(s_wifi_event_group, WIFI_FAIL_BIT);
+			xEventGroupSetBits(s_wifi_event_group, WIFI_FAIL_BIT);
 		}
 		ESP_LOGI(TAG,"connect to the AP fail");
 	} else if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP) {
@@ -126,12 +126,18 @@ void play(void *pvParameters)
 {
 	ESP_LOGI(pcTaskGetName(0), "Start");
 
-	while(1) {
-		bool ret = DF_begin(CONFIG_TX_GPIO, CONFIG_RX_GPIO, true);
-		ESP_LOGI(TAG, "DF_begin=%d", ret);
-		if (ret) break;
-		vTaskDelay(200);
-	}
+    bool debug = false;
+#if CONFIG_DEBUG_MODE
+    debug = true;
+#endif
+    bool ret = DF_begin(CONFIG_TX_GPIO, CONFIG_RX_GPIO, true, true, debug);
+    ESP_LOGI(TAG, "DF_begin=%d", ret);
+    if (!ret) {
+        ESP_LOGE(TAG, "DFPlayer Mini not online.");
+        while(1) {
+            vTaskDelay(1);
+        }
+    }
 	ESP_LOGI(TAG, "DFPlayer Mini online.");
 	DF_volume(30); //Set volume value. From 0 to 30
 

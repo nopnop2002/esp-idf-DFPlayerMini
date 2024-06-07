@@ -28,4 +28,10 @@ menu "DFPlayerMini Configuration"
 			Some GPIOs are used for other purposes (flash connections, etc.).
 			GPIOs 35-39 are input-only so cannot be used as outputse
 
+	config DEBUG_MODE
+		bool "Enable Debug Mode"
+		default false
+		help
+			Enable Debug Mode.
+
 endmenu

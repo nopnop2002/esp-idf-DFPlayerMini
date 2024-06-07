@@ -11,31 +11,37 @@
 
 #include "DFRobotDFPlayerMini.h"
 
-#define TAG "MAIN"
+static const char *TAG = "MAIN";
 
 void app_main()
 {
-	while(1) {
-		bool ret = DF_begin(CONFIG_TX_GPIO, CONFIG_RX_GPIO, true);
-		ESP_LOGI(TAG, "DF_begin=%d", ret);
-		if (ret) break;
-		vTaskDelay(200);
+	bool debug = false;
+#if CONFIG_DEBUG_MODE
+	debug = true;
+#endif
+	bool ret = DF_begin(CONFIG_TX_GPIO, CONFIG_RX_GPIO, true, true, debug);
+	ESP_LOGI(TAG, "DF_begin=%d", ret);
+	if (!ret) {
+		ESP_LOGE(TAG, "DFPlayer Mini not online.");
+		while(1) {
+			vTaskDelay(1);
+		}
 	}
 	ESP_LOGI(TAG, "DFPlayer Mini online.");
 	ESP_LOGI(TAG, "Play first track on 01 folder.");
 	DF_volume(30); //Set volume value. From 0 to 30
 	DF_play(1); //Play the first mp3
 
-    /*
-    Wait until play finish.
-    For some reason, when the play finished, Play Finished event is notified twice.
-    I don't know why.
+	/*
+	Wait until play finish.
+	For some reason, when the play finished, Play Finished event is notified twice.
+	I don't know why.
 
-    received:7E FF 6 3D 0 0 1 FE BD EF
-    Number:1 Play Finished!
-    received:7E FF 6 3D 0 0 1 FE BD EF
-    Number:1 Play Finished!
-    */
+	received:7E FF 6 3D 0 0 1 FE BD EF
+	Number:1 Play Finished!
+	received:7E FF 6 3D 0 0 1 FE BD EF
+	Number:1 Play Finished!
+	*/
 
 	while(1) {
 		if (DF_available()) {
