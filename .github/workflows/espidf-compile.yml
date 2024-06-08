@@ -19,17 +19,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        idf_ver:
+        idf_version:
           - release-v4.4
-          - release-v5.0
-          - release-v5.1
           - release-v5.2
-          - release-v5.3
         idf_target:
           - esp32
           - esp32s2
           - esp32c3
           - esp32s3
+        idf_path:
+           - 'GetStarted'
+
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repo
@@ -39,6 +39,6 @@ jobs:
     - name: Build Application with ESP-IDF
       uses: espressif/esp-idf-ci-action@v1
       with:
-        esp_idf_version: ${{ matrix.idf_ver }}
+        esp_idf_version: ${{ matrix.idf_version }}
         target: ${{ matrix.idf_target }}
-        path: 'GetStarted'
+        path: ${{ matrix.idf_path }}
