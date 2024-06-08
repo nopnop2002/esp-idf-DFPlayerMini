@@ -26,9 +26,6 @@ jobs:
           - esp32s2
           - esp32c3
           - esp32s3
-        idf_path:
-          - GetStarted
-          - PlayPeriodic
 
     runs-on: ubuntu-latest
     steps:
@@ -41,4 +38,4 @@ jobs:
       with:
         esp_idf_version: ${{ matrix.idf_version }}
         target: ${{ matrix.idf_target }}
-        path: ${{ matrix.idf_path }}
+        path: 'PlayPeriodic'
