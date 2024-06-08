@@ -3,12 +3,12 @@ name: esp-idf-ci-action
 on:
   pull_request:
     paths:
-      - "main/**"
+      - "GetStarted/main/**"
       - "components/**"
 
   push:
     paths:
-      - "main/**"
+      - "GetStarted/main/**"
       - "components/**"
 
   workflow_dispatch:
