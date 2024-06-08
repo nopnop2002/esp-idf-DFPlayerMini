@@ -20,7 +20,6 @@ jobs:
       fail-fast: false
       matrix:
         idf_version:
-          - release-v4.4
           - release-v5.2
         idf_target:
           - esp32
