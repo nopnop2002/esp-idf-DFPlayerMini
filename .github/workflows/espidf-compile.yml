@@ -28,6 +28,7 @@ jobs:
           - esp32s3
         idf_path:
           - GetStarted
+          - PlayPeriodic
 
     runs-on: ubuntu-latest
     steps:
