@@ -39,3 +39,7 @@ jobs:
         esp_idf_version: ${{ matrix.idf_version }}
         target: ${{ matrix.idf_target }}
         path: 'GetStarted'
+      with:
+        esp_idf_version: ${{ matrix.idf_version }}
+        target: ${{ matrix.idf_target }}
+        path: 'PlayPeriodic'
