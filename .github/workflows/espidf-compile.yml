@@ -27,7 +27,7 @@ jobs:
           - esp32c3
           - esp32s3
         idf_path:
-          - 'GetStarted'
+          - GetStarted
 
     runs-on: ubuntu-latest
     steps:
