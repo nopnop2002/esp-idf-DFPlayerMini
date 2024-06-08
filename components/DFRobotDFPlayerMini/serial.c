@@ -68,7 +68,6 @@ static void rx_task(void *pvParameters)
 #endif
 			//ESP_LOG_BUFFER_HEXDUMP(pcTaskGetName(0), data, rxBytes, ESP_LOG_INFO);
 			for (int index=0; index<rxBytes; index++) {
-				ESP_LOGD(pcTaskGetName(0), "rx_save_idx=%d data=0x%x", uart_obj.rx_save_idx, data[index]);
 #if CONFIG_DEBUG_MODE
 				ESP_LOGI(pcTaskGetName(0), "data[%d]=0x%x", index, data[index]);
 #endif
@@ -91,7 +90,11 @@ void serial_begin(int baudrate, int txd, int rxd) {
 		.parity = UART_PARITY_DISABLE,
 		.stop_bits = UART_STOP_BITS_1,
 		.flow_ctrl = UART_HW_FLOWCTRL_DISABLE,
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
 		.source_clk = UART_SCLK_DEFAULT,
+#else
+		.source_clk = UART_SCLK_APB,
+#endif
 	};
 	// We won't use a buffer for sending data.
 	uart_driver_install(UART_NUM_1, RX_BUF_SIZE * 2, 0, 0, NULL, 0);
