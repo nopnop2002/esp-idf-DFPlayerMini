@@ -3,12 +3,12 @@ name: esp-idf-ci-action
 on:
   pull_request:
     paths:
-      - "GetStarted/main/**"
+      - "main/**"
       - "components/**"
 
   push:
     paths:
-      - "GetStarted/main/**"
+      - "main/**"
       - "components/**"
 
   workflow_dispatch:
@@ -41,4 +41,4 @@ jobs:
       with:
         esp_idf_version: ${{ matrix.idf_ver }}
         target: ${{ matrix.idf_target }}
-        path: '.'
+        path: 'GetStarted'
