@@ -106,8 +106,8 @@ void serial_begin(int baudrate, int txd, int rxd) {
 	ESP_LOGD(__FUNCTION__, "prio=%d configMAX_PRIORITIES=%d", prio, configMAX_PRIORITIES);
 	if (prio != configMAX_PRIORITIES) prio++; 
 	uart_obj.parent_task_handle = xTaskGetCurrentTaskHandle();
-	xTaskCreate(rx_task, "uart_rx_task", 1024*2, NULL, prio, &(uart_obj.rx_task_handle));
-	xTaskCreate(tx_task, "uart_tx_task", 1024*2, NULL, prio, &(uart_obj.tx_task_handle));
+	xTaskCreate(rx_task, "uart_rx_task", 1024*3, NULL, prio, &(uart_obj.rx_task_handle));
+	xTaskCreate(tx_task, "uart_tx_task", 1024*3, NULL, prio, &(uart_obj.tx_task_handle));
 
 	// Wait for task start
 	vTaskDelay(10);
