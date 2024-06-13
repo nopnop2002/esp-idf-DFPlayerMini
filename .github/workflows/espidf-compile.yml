@@ -29,8 +29,6 @@ jobs:
           - esp32s3
         idf_path:
           - GetStarted
-          - PlayWithGpio
-          - PlayWithCron
 
     runs-on: ubuntu-latest
     steps:
