@@ -21,15 +21,16 @@ jobs:
       matrix:
         idf_version:
           - release-v4.4
-          - release-v5.0
-          - release-v5.1
           - release-v5.2
-          - release-v5.3
         idf_target:
           - esp32
           - esp32s2
           - esp32c3
           - esp32s3
+        idf_path:
+          - GetStarted
+          - PlayWithGpio
+          - PlayWithCron
 
     runs-on: ubuntu-latest
     steps:
@@ -42,5 +43,5 @@ jobs:
       with:
         esp_idf_version: ${{ matrix.idf_version }}
         target: ${{ matrix.idf_target }}
-        path: 'GetStarted'
+        path: ${{ matrix.idf_path }}
 
