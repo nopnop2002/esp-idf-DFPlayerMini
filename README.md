@@ -29,7 +29,7 @@ The two on the top are MP3-TF-16P.
 ![MP3-TF-16P-2](https://github.com/nopnop2002/esp-idf-DFPlayerMini/assets/6020549/d1866db4-2d55-4dd0-b627-748babe324b1)
 
 # MP3 Chip
-There are many variations of the MP3 IC installed in DF Player Mini.   
+DF Player Mini's MP3 IC has a wide variety of variations.   
 I own three DF Players, two with JC AA18 and one with YX5200.   
 JC AA18 works very stable.   
 But YX5200 give me this error sometime:
