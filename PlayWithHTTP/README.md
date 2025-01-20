@@ -23,8 +23,14 @@ You can connect using the mDNS hostname instead of the IP address.
 # Using Web Browser
 Double-click the link below.   
 This will launch your browser.   
-- Play
+- Play   
  http://esp32-player.local:8080/play
+- Stop   
+ http://esp32-player.local:8080/stop
+- Next   
+ http://esp32-player.local:8080/next
+- Query current status   
+ http://esp32-player.local:8080/query
 
 # Using Android
 With this [app](https://play.google.com/store/apps/details?id=com.app.restclient) you can start playing using your Android.   
