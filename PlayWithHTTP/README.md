@@ -21,7 +21,7 @@ You can connect using the mDNS hostname instead of the IP address.
 
 
 # Using Web Browser
-Double-click the link below.   
+Double-click or Open in new tab the link below.   
 This will launch your browser.   
 - Play   
  http://esp32-player.local:8080/play
