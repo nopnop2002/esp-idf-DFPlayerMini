@@ -21,3 +21,5 @@ This example requires WiFi and MQTT Broker.
 With this [app](https://play.google.com/store/apps/details?id=appinventor.ai_myhomethings_eu.MqttClientApp) you can start playing using your Android.   
 ![Image](https://github.com/user-attachments/assets/01d74a9a-fd23-4207-817c-7325db8c3d08)
 
+With this [app](https://play.google.com/store/apps/details?id=net.routix.mqttdash) you can start playing using your Android.   
+![Image](https://github.com/user-attachments/assets/6d19efe1-2362-4f24-958d-8d1194f8672f)
