@@ -25,4 +25,4 @@ With this [app](https://play.google.com/store/apps/details?id=com.app.restclient
 Once you register a URL in Collections, you can select the URL from Collections.   
 ![Image](https://github.com/user-attachments/assets/c0a22237-509e-404c-80c8-b546fe88d43f)
 
-![Image](https://github.com/user-attachments/assets/5e6c14bf-2235-4fad-a1ec-ba86f1d9e236)
+![Image](https://github.com/user-attachments/assets/d26d8352-d15c-43ed-aa31-5522b7780a65)
