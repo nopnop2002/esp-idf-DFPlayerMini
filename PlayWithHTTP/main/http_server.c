@@ -32,6 +32,8 @@ extern QueueHandle_t xQueueKey;
 static esp_err_t root_get_handler(httpd_req_t *req)
 {
 	ESP_LOGI(TAG, "root_get_handler req->uri=[%s]", req->uri);
+	if (strcmp(req->uri, "/favicon.ico") == 0) return ESP_OK;
+
 	if (strlen(req->uri) > 2) {
 		uint16_t key = req->uri[1];
 		ESP_LOGI(TAG, "key=0x%x", key);
