@@ -21,4 +21,6 @@ You can connect using the mDNS hostname instead of the IP address.
 # Using Android
 With this [app](https://play.google.com/store/apps/details?id=com.app.restclient) you can start playing using your Android.   
 ![Image](https://github.com/user-attachments/assets/8db268bd-82b2-4939-94b9-83bfe254c427)
+
+Once you register a URL in Collections, you can select the URL from Collections.   
 ![Image](https://github.com/user-attachments/assets/48ee67b8-23f5-4cb8-b31d-083b110d0baa)
