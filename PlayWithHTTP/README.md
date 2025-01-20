@@ -18,4 +18,6 @@ You can connect using the mDNS hostname instead of the IP address.
 - Query current status   
 ```curl "http://esp32-player.local:8080/query"``` or ```curl "http://IP_OF_ESP32:8080/query"```   
 
-
+# Using Android
+With this [app](https://play.google.com/store/apps/details?id=com.app.restclient) you can start playing using your Android.   
+![Image](https://github.com/user-attachments/assets/8db268bd-82b2-4939-94b9-83bfe254c427)
