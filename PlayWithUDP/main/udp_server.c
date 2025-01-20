@@ -67,7 +67,7 @@ void udp_server(void *pvParameters)
 		ESP_LOGI(TAG, "lwip_recv ret=%d",ret);
 		if (ret > 0) {
 			buffer[ret] = 0;
-			ESP_LOGI(TAG, "lwip_recv buffer=%s",buffer);
+			ESP_LOGI(TAG, "lwip_recv buffer=[%s]",buffer);
 			inet_ntop(AF_INET, &senderInfo.sin_addr, senderstr, sizeof(senderstr));
 			ESP_LOGI(TAG, "recvfrom : %s, port=%d", senderstr, ntohs(senderInfo.sin_port));
 			uint16_t key = buffer[0];
@@ -76,7 +76,7 @@ void udp_server(void *pvParameters)
 			}
 
 		}
-	}
+	} // end while
 
 	/* close socket. Don't reach here. */
 	ret = lwip_close(fd);

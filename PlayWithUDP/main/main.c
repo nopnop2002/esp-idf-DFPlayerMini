@@ -200,21 +200,12 @@ void app_main()
 	ESP_LOGI(TAG, "ESP_WIFI_MODE_STA");
 	wifi_init_sta();
 
-	/* Create Queue */
+	// Create Queue
 	xQueueKey = xQueueCreate( 1, sizeof(uint16_t) );
 	configASSERT( xQueueKey );
 
-	/* Get the local IP address */
-	esp_netif_ip_info_t ip_info;
-	ESP_ERROR_CHECK(esp_netif_get_ip_info(esp_netif_get_handle_from_ifkey("WIFI_STA_DEF"), &ip_info));
-	char cparam0[64];
-	sprintf(cparam0, IPSTR, IP2STR(&ip_info.ip));
-
-	/* Create task */
-	xTaskCreate(udp_server, "UDP", 1024*4, (void *)cparam0, 2, NULL);
+	// Create task
+	xTaskCreate(udp_server, "UDP", 1024*4, NULL, 2, NULL);
 	xTaskCreate(play, "PLAY", 1024*4, NULL, 2, NULL);
-
-	// Wait for the task to start, because cparam0 is discarded.
-	vTaskDelay(10);
 }
 
