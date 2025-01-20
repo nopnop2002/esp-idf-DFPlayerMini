@@ -9,6 +9,7 @@ This example requires WiFi.
 You can connect using the mDNS hostname instead of the IP address.   
 ![config-app-2](https://user-images.githubusercontent.com/6020549/214173801-54c53ce0-15bd-4dba-8840-e39e9f645717.jpg)
 
+# Using curl
 - Play   
 ```curl "http://esp32-player.local:8080/play"``` or ```curl "http://IP_OF_ESP32:8080/play"```   
 - Stop   
@@ -17,6 +18,13 @@ You can connect using the mDNS hostname instead of the IP address.
 ```curl "http://esp32-player.local:8080/next"``` or ```curl "http://IP_OF_ESP32:8080/next"```   
 - Query current status   
 ```curl "http://esp32-player.local:8080/query"``` or ```curl "http://IP_OF_ESP32:8080/query"```   
+
+
+# Using Web Browser
+Double-click the link below.   
+This will launch your browser.   
+- Play
+ http://esp32-player.local:8080/play
 
 # Using Android
 With this [app](https://play.google.com/store/apps/details?id=com.app.restclient) you can start playing using your Android.   
