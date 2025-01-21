@@ -54,7 +54,7 @@ void play(void *pvParameters)
 		}
 	}
 	ESP_LOGI(TAG, "DFPlayer Mini online.");
-	DF_volume(30); //Set volume value. From 0 to 30
+	DF_volume(15); //Set volume value. From 0 to 30
 
 	uint16_t key;
 	while(1) {
@@ -75,24 +75,37 @@ void play(void *pvParameters)
 			}
 		}
 
-		if (key == 0x6E) { // 'n'
+		if (key == 0x31) { // '1'
+			ESP_LOGI(pcTaskGetName(0), "Play #1 track");
+			DF_play(1); //Play the 0001.mp3
+		} else if (key == 0x32) { // '2'
+			ESP_LOGI(pcTaskGetName(0), "Play #2 track");
+			DF_play(2); //Play the 0002.mp3
+		} else if (key == 0x6E) { // 'n'
 			ESP_LOGI(pcTaskGetName(0), "Play next");
 			DF_next(); //Play the next mp3
 		} else if (key == 0x70) { // 'p'
-			ESP_LOGI(pcTaskGetName(0), "Play first");
-			DF_play(1); //Play the first mp3
+			ESP_LOGI(pcTaskGetName(0), "Play previous");
+			DF_previous(); //Play the previous mp3
 		} else if (key == 0x73) { // 's'
 			ESP_LOGI(pcTaskGetName(0), "Stop play");
 			DF_stop(); //Stop
+		} else if (key == 0x2b) { // '+'
+			ESP_LOGI(pcTaskGetName(0), "Volume up");
+			DF_volumeUp(); //volumeUp
+		} else if (key == 0x2d) { // '-'
+			ESP_LOGI(pcTaskGetName(0), "Volume down");
+			DF_volumeDown(); //volumeDown
 		} else if (key == 0x71) { // 'q'
-			int value = DF_readState();
-			uint8_t type = DF_readType();
-			ESP_LOGI(pcTaskGetName(0), "type=%d value=%x", type, value);
-			if (type != DFPlayerFeedBack) { //Error while Reading.
-				ESP_LOGE(pcTaskGetName(0), "Error while Reading.");
-			}
+			ESP_LOGI(pcTaskGetName(0), "DF_readState=%d", DF_readState());
+			ESP_LOGI(pcTaskGetName(0), "DF_readVolume=%d", DF_readVolume());
+			ESP_LOGI(pcTaskGetName(0), "DF_readEQ=%d", DF_readEQ());
+			ESP_LOGI(pcTaskGetName(0), "DF_readPlaybackMode=%d", DF_readPlaybackMode());
+			ESP_LOGI(pcTaskGetName(0), "DF_readSoftVersion=%d", DF_readSoftVersion());
+			ESP_LOGI(pcTaskGetName(0), "DF_readFileCounts=%d", DF_readFileCounts(DFPLAYER_DEVICE_SD));
+			ESP_LOGI(pcTaskGetName(0), "DF_readCurrentFileNumber=%d", DF_readCurrentFileNumber(DFPLAYER_DEVICE_SD));
 		} else {
-			ESP_LOGW(pcTaskGetName(0), "Type p to play. Type s to stop. Type n to next. Type q to status.");
+			//ESP_LOGW(pcTaskGetName(0), "Type p to play. Type s to stop. Type n to next. Type q to status.");
 		}
 	}
 

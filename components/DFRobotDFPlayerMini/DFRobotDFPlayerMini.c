@@ -474,7 +474,12 @@ uint16_t DF_readState(){
 int DF_readVolume(){
   DF_sendStack1(0x43);
   if (DF_waitAvailable(0)) {
-	return DF_read();
+	if (DF_readType() == DFPlayerFeedBack) {
+	  return DF_read();
+    }
+	else{
+	  return -1;
+	}
   }
   else{
 	return -1;
@@ -495,6 +500,37 @@ int DF_readEQ(){
 	return -1;
   }
 }
+
+int DF_readPlaybackMode(){
+  DF_sendStack1(0x45);
+  if (DF_waitAvailable(0)) {
+    if (DF_readType() == DFPlayerFeedBack) {
+      return DF_read();
+    }
+    else{
+      return -1;
+    }
+  }
+  else{
+    return -1;
+  }
+}
+
+int DF_readSoftVersion(){
+  DF_sendStack1(0x46);
+  if (DF_waitAvailable(0)) {
+    if (DF_readType() == DFPlayerFeedBack) {
+      return DF_read();
+    }
+    else{
+      return -1;
+    }
+  }
+  else{
+    return -1;
+  }
+}
+
 
 int DF_readFileCounts(uint8_t device){
   switch (device) {

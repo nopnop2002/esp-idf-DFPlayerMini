@@ -127,6 +127,8 @@ DF_loop(1);  //Loop the first mp3
 DF_pause();  //pause the mp3. This cannot be resumed, so it is the same as stop.
 DF_start();  //start the mp3 from the pause
 DF_playFolder(15, 4);  //play specific mp3 in SD:/15/004.mp3; Folder Name(1~99); File Name(1~255)
+DF_enableLoop(); //start loop current mp3 file.
+DF_disableLoop(); //stop loop current mp3 file.
 DF_enableLoopAll(); //start loop all mp3 files in SD.
 DF_disableLoopAll(); //stop loop all mp3 files in SD.
 DF_playMp3Folder(4); //play specific mp3 in SD:/MP3/0004.mp3; File Name(0~65535)
@@ -135,13 +137,13 @@ DF_stopAdvertise(); //stop advertise
 DF_playLargeFolder(2, 999); //play specific mp3 in SD:/02/004.mp3; Folder Name(1~10); File Name(1~1000)
 DF_loopFolder(5); //loop all mp3 files in folder SD:/05.
 DF_randomAll(); //Random play all the mp3.
-DF_enableLoop(); //start loop current mp3 file.
-DF_disableLoop(); //stop loop current mp3 file.
 
 //----Read imformation----
-printf("%d",DF_readState()); //read mp3 state
+printf("%d",DF_readState()); //read device state
 printf("%d",DF_readVolume()); //read current volume
 printf("%d",DF_readEQ()); //read EQ setting
+printf("%d",DF_readPlaybackMode()); //read playback mode setting
+printf("%d",DF_DF_readSoftVersion()); //read software version
 printf("%d",DF_readFileCounts(DFPLAYER_DEVICE_SD)); //read all file counts in SD card
 printf("%d",DF_readCurrentFileNumber(DFPLAYER_DEVICE_SD)); //read current play file number in SD card
 printf("%d",DF_readFileCountsInFolder(3)); //read fill counts in folder SD:/03

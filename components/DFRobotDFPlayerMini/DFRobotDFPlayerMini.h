@@ -178,6 +178,10 @@
   int DF_readVolume();
   
   int DF_readEQ();
+
+  int DF_readPlaybackMode();
+
+  int DF_readSoftVersion();
   
   int DF_readFileCounts(uint8_t device);
   
