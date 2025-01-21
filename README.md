@@ -128,16 +128,16 @@ DF_loop(1);  //Loop the first mp3
 DF_pause();  //pause the mp3. This cannot be resumed, so it is the same as stop.
 DF_start();  //start the mp3 from the pause
 DF_playFolder(15, 4);  //play specific mp3 in SD:/15/004.mp3; Folder Name(1~99); File Name(1~255)
-DF_enableLoopAll(); //loop all mp3 files.
-DF_disableLoopAll(); //stop loop all mp3 files.
+DF_enableLoopAll(); //start loop all mp3 files in SD.
+DF_disableLoopAll(); //stop loop all mp3 files in SD.
 DF_playMp3Folder(4); //play specific mp3 in SD:/MP3/0004.mp3; File Name(0~65535)
 DF_advertise(3); //advertise specific mp3 in SD:/ADVERT/0003.mp3; File Name(0~65535)
 DF_stopAdvertise(); //stop advertise
 DF_playLargeFolder(2, 999); //play specific mp3 in SD:/02/004.mp3; Folder Name(1~10); File Name(1~1000)
 DF_loopFolder(5); //loop all mp3 files in folder SD:/05.
 DF_randomAll(); //Random play all the mp3.
-DF_enableLoop(); //enable loop.
-DF_disableLoop(); //disable loop.
+DF_enableLoop(); //start loop current mp3 file.
+DF_disableLoop(); //stop loop current mp3 file.
 
 //----Read imformation----
 printf("%d",DF_readState()); //read mp3 state
