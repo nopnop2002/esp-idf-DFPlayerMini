@@ -125,7 +125,7 @@ DF_next();  //Play next mp3
 DF_previous();  //Play previous mp3
 DF_play(1);  //Play the first mp3
 DF_loop(1);  //Loop the first mp3
-DF_pause();  //pause the mp3
+DF_pause();  //pause the mp3. This cannot be resumed, so it is the same as stop.
 DF_start();  //start the mp3 from the pause
 DF_playFolder(15, 4);  //play specific mp3 in SD:/15/004.mp3; Folder Name(1~99); File Name(1~255)
 DF_enableLoopAll(); //loop all mp3 files.
