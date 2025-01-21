@@ -143,8 +143,8 @@ DF_disableLoop(); //disable loop.
 printf("%d",DF_readState()); //read mp3 state
 printf("%d",DF_readVolume()); //read current volume
 printf("%d",DF_readEQ()); //read EQ setting
-printf("%d",DF_readFileCounts()); //read all file counts in SD card
-printf("%d",DF_readCurrentFileNumber()); //read current play file number
+printf("%d",DF_readFileCounts(DFPLAYER_DEVICE_SD)); //read all file counts in SD card
+printf("%d",DF_readCurrentFileNumber(DFPLAYER_DEVICE_SD)); //read current play file number
 printf("%d",DF_readFileCountsInFolder(3)); //read fill counts in folder SD:/03
 ```
 
