@@ -11,9 +11,8 @@ I made this for the purpose of playing MP3 files more easily.
 I ported from [here](https://github.com/DFRobot/DFRobotDFPlayerMini) and used [this](https://github.com/nopnop2002/esp-idf-serial) component.
 
 # Software requirements
-ESP-IDF V4.4/V5.x.   
-ESP-IDF V5.0 is required when using ESP32C2.   
-ESP-IDF V5.1 is required when using ESP32C6 and ESP32H2.   
+ESP-IDF V5.0 or later.   
+ESP-IDF V4.4 release branch reached EOL in July 2024.   
 
 # Hardware requirements
 DFPlayer - A Mini MP3 Player For Arduino.   
