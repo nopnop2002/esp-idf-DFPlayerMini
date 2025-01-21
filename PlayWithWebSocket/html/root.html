@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!-
+original is here.
+https://www.webdesignleaves.com/pr/jquery/js-audio-player.html
+->
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sprintf/1.1.2/sprintf.min.js"></script>
+	<title>DFPlayerMini</title>
+</head>
+
+<body>
+	<div class="audio-playlist">
+	  <div class="controls">
+	    <div class="row">
+	      <button id="play-btn" class="toggle play-btn" type="button" aria-label="Play" onclick="clickPlay(this)"></button>
+	      <div id="playing-title" class="playing-title">Title</div>
+	    </div>
+	    <div class="row">
+	      <button class="skip-backward skip-backward-btn" type="button" aria-label="Skip Backward" onclick="clickSkip(this)"></button>
+	      <button class="skip-forward skip-forward-btn" type="button" aria-label="Skip Forward" onclick="clickSkip(this)"></button>
+	      <button class="mute volume-btn" type="button" aria-label="Mute" onclick="clickMute(this)"></button>
+	      <div class="time" role="timer">
+	        <span class="current-time">0</span>
+	      </div>
+	      <input class="range-slider" type="range" name="vol" min="0" max="30" value="15" step="1" aria-label="volume bar" onchange="changeVolume(this)">
+	      <div class="time" role="timer">
+	        <span class="duration">30</span>
+	      </div>
+	      <button class="loop loop-btn" type="button" aria-label="Loop" onclick="clickLoop(this)"></button>
+	    </div>
+	  </div>
+	  <div class="track-list">
+	    <ul id=track-list>
+	    </ul>
+	  </div>
+	</div>
+
+	<script type="text/javascript" src="main.js"></script>
+</body>
+</html>
+
