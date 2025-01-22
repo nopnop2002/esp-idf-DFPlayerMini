@@ -2,7 +2,7 @@
 
 Play music using the Web Socket.   
 This example requires WiFi.   
-![Image](https://github.com/user-attachments/assets/05aada2c-62ff-4ab0-aaf6-4293cdffd25b)
+![Image](https://github.com/user-attachments/assets/2d6a6619-d9fd-4e6c-ac0f-ed0611a0097a)
 
 This project uses [this](https://github.com/Molorius/esp32-websocket) component.   
 This component can communicate directly with the browser.   
@@ -18,4 +18,4 @@ This is a Japanese site.
 # How to use
 Open a browser and enter the ESP32 IP address in the address bar.   
 You can use ```esp32-server.local``` instead of the IP address.   
-
+![Image](https://github.com/user-attachments/assets/9948d75f-2097-4281-a72d-f1112af753aa)
