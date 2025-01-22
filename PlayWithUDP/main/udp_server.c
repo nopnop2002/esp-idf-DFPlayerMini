@@ -9,17 +9,14 @@
 */
 
 #include <stdio.h>
-#include <stdint.h>
-#include <stddef.h>
+#include <inttypes.h>
 #include <string.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_log.h"
 
-#include "lwip/err.h"
 #include "lwip/sockets.h"
-#include "lwip/sys.h"
-#include "lwip/netdb.h"
+#include "mdns.h"
 
 extern QueueHandle_t xQueueKey;
 
@@ -28,6 +25,16 @@ static const char *TAG = "UDP";
 void udp_server(void *pvParameters)
 {
 	ESP_LOGI(TAG, "Start UDP PORT=%d", CONFIG_UDP_PORT);
+
+	// Initialize mDNS
+	ESP_ERROR_CHECK( mdns_init() );
+
+	// Set mDNS hostname (required if you want to advertise services)
+	ESP_ERROR_CHECK( mdns_hostname_set(CONFIG_MDNS_HOSTNAME) );
+	ESP_LOGI(TAG, "mdns hostname set to: [%s]", CONFIG_MDNS_HOSTNAME);
+
+	// Add service to mDNS server
+	ESP_ERROR_CHECK( mdns_service_add(NULL, "_device-info", "_udp", CONFIG_UDP_PORT, NULL, 0) );
 
 	/* set up address to recvfrom */
 	struct sockaddr_in addr;
@@ -44,7 +51,7 @@ void udp_server(void *pvParameters)
 	LWIP_ASSERT("fd >= 0", fd >= 0);
 
 #if 0
-	/* set option */
+	/* set broadcat option */
 	int broadcast=1;
 	ret = lwip_setsockopt(fd, SOL_SOCKET, SO_BROADCAST, &broadcast, sizeof broadcast);
 	LWIP_ASSERT("ret >= 0", ret >= 0);
