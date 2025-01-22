@@ -16,7 +16,7 @@ You can connect using the mDNS hostname instead of the IP address.
 ```curl "http://esp32-player.local:8080/stop"``` or ```curl "http://IP_OF_ESP32:8080/stop"```   
 - Next   
 ```curl "http://esp32-player.local:8080/next"``` or ```curl "http://IP_OF_ESP32:8080/next"```   
-- Query current status   
+- Information inquiry   
 ```curl "http://esp32-player.local:8080/query"``` or ```curl "http://IP_OF_ESP32:8080/query"```   
 
 
