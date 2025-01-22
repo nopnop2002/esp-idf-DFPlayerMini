@@ -2,7 +2,7 @@
 
 Play music using the Web Socket.   
 This example requires WiFi.   
-![Image](https://github.com/user-attachments/assets/8cf7faf6-f07c-4cf0-b925-b778a6cb0993)
+![Image](https://github.com/user-attachments/assets/05aada2c-62ff-4ab0-aaf6-4293cdffd25b)
 
 This project uses [this](https://github.com/Molorius/esp32-websocket) component.   
 This component can communicate directly with the browser.   
