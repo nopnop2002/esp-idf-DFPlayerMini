@@ -13,7 +13,7 @@ This example requires WiFi.
 ```echo -n "stop" | socat - UDP-DATAGRAM:esp32-server.local:9876```   
 - Next   
 ```echo -n "next" | socat - UDP-DATAGRAM:esp32-server.local:9876```   
-- Query current status   
+- Information inquiry   
 ```echo -n "query" | socat - UDP-DATAGRAM:esp32-server.local:9876```   
 
 # Using netcat(nc)
@@ -23,5 +23,5 @@ This example requires WiFi.
 ```echo -n "stop" | netcat -u -w1 esp32-server.local 9876```   
 - Next   
 ```echo -n "next" | netcat -u -w1 esp32-server.local 9876```   
-- Query current status   
+- Information inquiry   
 ```echo -n "query" | netcat -u -w1 esp32-server.local 9876```   
