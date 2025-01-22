@@ -18,4 +18,4 @@ This is a Japanese site.
 # How to use
 Open a browser and enter the ESP32 IP address in the address bar.   
 You can use ```esp32-server.local``` instead of the IP address.   
-![Image](https://github.com/user-attachments/assets/9948d75f-2097-4281-a72d-f1112af753aa)
+![Image](https://github.com/user-attachments/assets/460c5113-2ef4-48d7-8452-3239620fe4fe)
