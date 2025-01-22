@@ -14,7 +14,7 @@ This example requires WiFi and MQTT Broker.
 ```mosquitto_pub -h broker.emqx.io -p 1883 -t "/topic/dfplay/stop" -m ""```   
 - Next   
 ```mosquitto_pub -h broker.emqx.io -p 1883 -t "/topic/dfplay/next" -m ""```   
-- Query current status   
+- Information inquiry   
 ```mosquitto_pub -h broker.emqx.io -p 1883 -t "/topic/dfplay/query" -m ""```   
 
 # Using Android
