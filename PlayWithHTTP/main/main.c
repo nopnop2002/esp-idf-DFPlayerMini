@@ -186,12 +186,13 @@ void play(void *pvParameters)
 			ESP_LOGI(pcTaskGetName(0), "Stop play");
 			DF_stop(); //Stop
 		} else if (key == 0x71) { // 'q'
-			int value = DF_readState();
-			uint8_t type = DF_readType();
-			ESP_LOGI(pcTaskGetName(0), "type=%d value=%x", type, value);
-			if (type != DFPlayerFeedBack) { //Error while Reading.
-				ESP_LOGE(pcTaskGetName(0), "Error while Reading.");
-			}
+			ESP_LOGI(pcTaskGetName(0), "DF_readState=%d", DF_readState());
+			ESP_LOGI(pcTaskGetName(0), "DF_readVolume=%d", DF_readVolume());
+			ESP_LOGI(pcTaskGetName(0), "DF_readEQ=%d", DF_readEQ());
+			ESP_LOGI(pcTaskGetName(0), "DF_readPlaybackMode=%d", DF_readPlaybackMode());
+			ESP_LOGI(pcTaskGetName(0), "DF_readSoftVersion=%d", DF_readSoftVersion());
+			ESP_LOGI(pcTaskGetName(0), "DF_readFileCounts=%d", DF_readFileCounts(DFPLAYER_DEVICE_SD));
+			ESP_LOGI(pcTaskGetName(0), "DF_readCurrentFileNumber=%d", DF_readCurrentFileNumber(DFPLAYER_DEVICE_SD));
 		} else {
 			ESP_LOGW(pcTaskGetName(0), "Type p to play. Type s to stop. Type n to next. Type q to status.");
 		}
