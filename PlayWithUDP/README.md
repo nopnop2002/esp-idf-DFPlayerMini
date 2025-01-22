@@ -4,7 +4,7 @@ Play music using the UDP.
 This example requires WiFi.   
 
 ![config-top](https://user-images.githubusercontent.com/6020549/215076675-9ff62410-2996-4259-9262-307726c466ea.jpg)
-![Image](https://github.com/user-attachments/assets/c351a189-787e-4d1d-a585-abbd90311c05)
+![Image](https://github.com/user-attachments/assets/00a2c9fb-2776-4edf-8eda-4f5cf5cf5a18)
 
 # Using socat
 - Play   
