@@ -5,7 +5,11 @@ This example requires WiFi and MQTT Broker.
 
 ![config-top](https://user-images.githubusercontent.com/6020549/213997705-0dcb798f-7abb-40d3-a365-575713222be0.jpg)
 ![config-app](https://user-images.githubusercontent.com/6020549/213997717-5dcac080-2385-4ef2-9712-400bf9c1daee.jpg)
+
+Set the information of your access point.   
 ![config-wifi](https://user-images.githubusercontent.com/6020549/213997727-4e6535c5-1c6d-4e2e-b642-f84cc35d84ee.jpg)
+
+Set the information of your MQTT broker.   
 ![config-broker](https://user-images.githubusercontent.com/6020549/213997731-366e50c0-94e6-4f90-a44c-77c307fa3105.jpg)
 
 # Using mosquitto client
