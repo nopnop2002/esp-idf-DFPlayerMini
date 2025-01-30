@@ -8,6 +8,8 @@ This example requires WiFi and MQTT Broker.
 ![config-wifi](https://user-images.githubusercontent.com/6020549/213997727-4e6535c5-1c6d-4e2e-b642-f84cc35d84ee.jpg)
 ![config-broker](https://user-images.githubusercontent.com/6020549/213997731-366e50c0-94e6-4f90-a44c-77c307fa3105.jpg)
 
+# Using mosquitto client
+
 - Play   
 ```mosquitto_pub -h broker.emqx.io -p 1883 -t "/topic/dfplay/play" -m ""```   
 - Stop   
