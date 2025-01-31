@@ -14,6 +14,7 @@
 #include "esp_wifi.h"
 #include "esp_event.h"
 #include "nvs_flash.h"
+#include "mdns.h"
 
 #include "DFRobotDFPlayerMini.h"
 
@@ -123,7 +124,6 @@ void wifi_init_sta(void)
 	vEventGroupDelete(s_wifi_event_group);
 }
 
-
 void play(void *pvParameters)
 {
 	ESP_LOGI(pcTaskGetName(0), "Start");
@@ -188,7 +188,7 @@ void play(void *pvParameters)
 	vTaskDelete( NULL );
 }
 
-void mqtt(void *pvParameters);
+void mqtt_sub(void *pvParameters);
 
 void app_main()
 {
@@ -200,15 +200,18 @@ void app_main()
 	}
 	ESP_ERROR_CHECK(ret);
 
-	ESP_LOGI(TAG, "ESP_WIFI_MODE_STA");
+	// Initialize WiFi
 	wifi_init_sta();
 
-	/* Create Queue */
+	// Initialize mDNS
+	ESP_ERROR_CHECK( mdns_init() );
+
+	// Create Queue
 	xQueueKey = xQueueCreate( 1, sizeof(uint16_t) );
 	configASSERT( xQueueKey );
 
-	/* Create task */
-	xTaskCreate(mqtt, "MQTT", 1024*4, NULL, 2, NULL);
+	// Create task
+	xTaskCreate(mqtt_sub, "SUB", 1024*4, NULL, 2, NULL);
 	xTaskCreate(play, "PLAY", 1024*4, NULL, 2, NULL);
 }
 

@@ -1,10 +1,11 @@
-/* MQTT (over TCP) Example
+/*
+	MQTT (over TCP) Example
 
 	This example code is in the Public Domain (or CC0 licensed, at your option.)
 
-	 Unless required by applicable law or agreed to in writing, this
-	 software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-	 CONDITIONS OF ANY KIND, either express or implied.
+	Unless required by applicable law or agreed to in writing, this
+	software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+	CONDITIONS OF ANY KIND, either express or implied.
 */
 
 #include <stdio.h>
@@ -18,25 +19,21 @@
 #include "esp_event.h"
 #include "esp_mac.h"
 #include "mqtt_client.h"
+#include "mdns.h"
 
 #include "mqtt.h"
 
 static const char *TAG = "MQTT";
  
+extern const uint8_t root_cert_pem_start[] asm("_binary_root_cert_pem_start");
+extern const uint8_t root_cert_pem_end[] asm("_binary_root_cert_pem_end");
+
 extern QueueHandle_t xQueueKey;
 
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
 static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_t event_id, void *event_data)
-#else
-static esp_err_t mqtt_event_handler(esp_mqtt_event_handle_t event)
-#endif
 {
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
 	esp_mqtt_event_handle_t event = event_data;
 	MQTT_t *mqttBuf = handler_args;
-#else
-	MQTT_t *mqttBuf = event->user_context; 
-#endif
 	ESP_LOGI(TAG, "taskHandle=0x%x", (unsigned int)mqttBuf->taskHandle);
 	mqttBuf->event_id = event->event_id;
 	switch (event->event_id) {
@@ -81,16 +78,58 @@ static esp_err_t mqtt_event_handler(esp_mqtt_event_handle_t event)
 			ESP_LOGI(TAG, "Other event id:%d", event->event_id);
 			break;
 	}
-#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
-	return ESP_OK;
-#endif
+	return;
 }
 
-
-void mqtt(void *pvParameters)
+esp_err_t query_mdns_host(const char * host_name, char *ip)
 {
-	ESP_LOGI(TAG, "Start");
-	ESP_LOGI(TAG, "CONFIG_BROKER_URL=[%s]", CONFIG_BROKER_URL);
+	ESP_LOGD(__FUNCTION__, "Query A: %s", host_name);
+
+	struct esp_ip4_addr addr;
+	addr.addr = 0;
+
+	esp_err_t err = mdns_query_a(host_name, 10000,	&addr);
+	if(err){
+		if(err == ESP_ERR_NOT_FOUND){
+			ESP_LOGW(__FUNCTION__, "%s: Host was not found!", esp_err_to_name(err));
+			return ESP_FAIL;
+		}
+		ESP_LOGE(__FUNCTION__, "Query Failed: %s", esp_err_to_name(err));
+		return ESP_FAIL;
+	}
+
+	ESP_LOGD(__FUNCTION__, "Query A: %s.local resolved to: " IPSTR, host_name, IP2STR(&addr));
+	sprintf(ip, IPSTR, IP2STR(&addr));
+	return ESP_OK;
+}
+
+void convert_mdns_host(char * from, char * to)
+{
+	ESP_LOGI(__FUNCTION__, "from=[%s]",from);
+	strcpy(to, from);
+	char *sp;
+	sp = strstr(from, ".local");
+	if (sp == NULL) return;
+
+	int _len = sp - from;
+	ESP_LOGD(__FUNCTION__, "_len=%d", _len);
+	char _from[128];
+	strcpy(_from, from);
+	_from[_len] = 0;
+	ESP_LOGI(__FUNCTION__, "_from=[%s]", _from);
+
+	char _ip[128];
+	esp_err_t ret = query_mdns_host(_from, _ip);
+	ESP_LOGI(__FUNCTION__, "query_mdns_host=%d _ip=[%s]", ret, _ip);
+	if (ret != ESP_OK) return;
+
+	strcpy(to, _ip);
+	ESP_LOGI(__FUNCTION__, "to=[%s]", to);
+}
+
+void mqtt_sub(void *pvParameters)
+{
+	ESP_LOGI(TAG, "Start CONFIG_MQTT_BROKER=[%s]", CONFIG_MQTT_BROKER);
 
 	// Set client id from mac
 	uint8_t mac[8];
@@ -102,32 +141,57 @@ void mqtt(void *pvParameters)
 	sprintf(client_id, "esp32-%02x%02x%02x%02x%02x%02x", mac[0],mac[1],mac[2],mac[3],mac[4],mac[5]);
 	ESP_LOGI(TAG, "client_id=[%s]", client_id);
 
-	// Initialize user context
+	// Resolve mDNS host name
+	char ip[128];
+	char uri[138];
+	ESP_LOGI(TAG, "CONFIG_MQTT_BROKER=[%s]", CONFIG_MQTT_BROKER);
+	convert_mdns_host(CONFIG_MQTT_BROKER, ip);
+	ESP_LOGI(TAG, "ip=[%s]", ip);
+#if CONFIG_MQTT_TRANSPORT_OVER_TCP
+	ESP_LOGI(TAG, "MQTT_TRANSPORT_OVER_TCP");
+	sprintf(uri, "mqtt://%.60s:%d", ip, CONFIG_MQTT_PORT_TCP);
+#elif CONFIG_MQTT_TRANSPORT_OVER_SSL
+	ESP_LOGI(TAG, "MQTT_TRANSPORT_OVER_SSL");
+	sprintf(uri, "mqtts://%.60s:%d", ip, CONFIG_MQTT_PORT_SSL);
+#elif CONFIG_MQTT_TRANSPORT_OVER_WS
+	ESP_LOGI(TAG, "MQTT_TRANSPORT_OVER_WS");
+	sprintf(uri, "ws://%.60s:%d/mqtt", ip, CONFIG_MQTT_PORT_WS);
+#elif CONFIG_MQTT_TRANSPORT_OVER_WSS
+	ESP_LOGI(TAG, "MQTT_TRANSPORT_OVER_WSS");
+	sprintf(uri, "wss://%.60s:%d/mqtt", ip, CONFIG_MQTT_PORT_WSS);
+#endif
+	ESP_LOGI(TAG, "uri=[%s]", uri);
+
+	// Initialize MQTT configuration structure
+	esp_mqtt_client_config_t mqtt_cfg = {
+		.broker.address.uri = uri,
+#if CONFIG_MQTT_TRANSPORT_OVER_TCP
+#elif CONFIG_MQTT_TRANSPORT_OVER_SSL
+		.broker.verification.certificate = (const char *)root_cert_pem_start,
+#elif CONFIG_MQTT_TRANSPORT_OVER_WS
+#elif CONFIG_MQTT_TRANSPORT_OVER_WSS
+		.broker.verification.certificate = (const char *)root_cert_pem_start,
+#endif
+#if CONFIG_BROKER_AUTHENTICATION
+		.credentials.username = CONFIG_AUTHENTICATION_USERNAME,
+		.credentials.authentication.password = CONFIG_AUTHENTICATION_PASSWORD,
+#endif
+		.credentials.client_id = client_id
+	};
+
+#if CONFIG_MQTT_PROTOCOL_V_3_1_1
+	ESP_LOGI(TAG, "MQTT_PROTOCOL_V_3_1_1");
+	mqtt_cfg.session.protocol_ver = MQTT_PROTOCOL_V_3_1_1;
+#elif CONFIG_MQTT_PROTOCOL_V_5
+	ESP_LOGI(TAG, "MQTT_PROTOCOL_V_5");
+	mqtt_cfg.session.protocol_ver = MQTT_PROTOCOL_V_5;
+#endif
+
 	MQTT_t mqttBuf;
 	mqttBuf.taskHandle = xTaskGetCurrentTaskHandle();
 	ESP_LOGI(TAG, "taskHandle=0x%x", (unsigned int)mqttBuf.taskHandle);
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-	esp_mqtt_client_config_t mqtt_cfg = {
-		.broker.address.uri = CONFIG_BROKER_URL,
-		.broker.address.port = 1883,
-		.credentials.client_id = client_id
-	};
-#else
-	esp_mqtt_client_config_t mqtt_cfg = {
-		.user_context = &mqttBuf,
-		.uri = CONFIG_BROKER_URL,
-		.port = 1883,
-		.event_handle = mqtt_event_handler,
-		.client_id = client_id
-	};
-#endif
-
 	esp_mqtt_client_handle_t mqtt_client = esp_mqtt_client_init(&mqtt_cfg);
-
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
 	esp_mqtt_client_register_event(mqtt_client, ESP_EVENT_ANY_ID, mqtt_event_handler, &mqttBuf);
-#endif
-
 	esp_mqtt_client_start(mqtt_client);
 
 	int base_topic_len = strlen(CONFIG_MQTT_SUB_TOPIC)-1;
