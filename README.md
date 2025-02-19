@@ -149,8 +149,33 @@ printf("%d",DF_readCurrentFileNumber(DFPLAYER_DEVICE_SD)); //read current play f
 printf("%d",DF_readFileCountsInFolder(3)); //read fill counts in folder SD:/03
 ```
 
-
 # For more info
 Document is [here](https://picaxe.com/docs/spe033.pdf).   
 
 Product information is [here](https://www.dfrobot.com/wiki/index.php/DFPlayer_Mini_SKU:DFR0299).   
+
+# How to use this component in your project   
+Create idf_component.yml in the same directory as main.c.   
+```
+YourProject --+-- CMakeLists.txt
+              +-- main --+-- main.c
+                         +-- CMakeLists.txt
+                         +-- idf_component.yml
+```
+
+Contents of idf_component.yml.
+```
+dependencies:
+  nopnop2002/DFPlayerMini:
+    path: components/DFRobotDFPlayerMini/
+    git: https://github.com/nopnop2002/esp-idf-DFPlayerMini.git
+```
+
+When you build a projects esp-idf will automaticly fetch repository to managed_components dir and link with your code.   
+```
+YourProject --+-- CMakeLists.txt
+              +-- main --+-- main.c
+              |          +-- CMakeLists.txt
+              |          +-- idf_component.yml
+              +-- managed_components ----- nopnop2002__DFPlayerMini
+```
