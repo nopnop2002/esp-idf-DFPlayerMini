@@ -9,8 +9,6 @@
 
 #include <stdio.h>
 #include <string.h>
-//#include <sys/stat.h>
-//#include <mbedtls/base64.h>
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -18,11 +16,7 @@
 #include "freertos/semphr.h"
 #include "esp_log.h"
 #include "esp_err.h"
-//#include "esp_vfs.h"
-//#include "esp_spiffs.h"
-//#include "esp_chip_info.h"
 #include "esp_http_server.h"
-#include "cJSON.h"
 
 static const char *TAG = "HTTP";
 
