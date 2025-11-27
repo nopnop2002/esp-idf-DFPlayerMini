@@ -63,7 +63,6 @@ esp_err_t wifi_init_sta(void)
 	s_wifi_event_group = xEventGroupCreate();
 
 	ESP_ERROR_CHECK(esp_netif_init());
-
 	ESP_ERROR_CHECK(esp_event_loop_create_default());
 	esp_netif_create_default_wifi_sta();
 
@@ -98,12 +97,10 @@ esp_err_t wifi_init_sta(void)
 			},
 		},
 	};
-	ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA) );
-	ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_STA, &wifi_config) );
-	//ESP_ERROR_CHECK(esp_wifi_set_ps(WIFI_PS_NONE));
-	ESP_ERROR_CHECK(esp_wifi_start() );
-
-	ESP_LOGI(TAG, "wifi_init_sta finished.");
+	ESP_ERROR_CHECK(esp_wifi_set_ps(WIFI_PS_NONE));
+	ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
+	ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &wifi_config));
+	ESP_ERROR_CHECK(esp_wifi_start());
 
 	/* Waiting until either the connection is established (WIFI_CONNECTED_BIT) or connection failed for the maximum
 	 * number of re-tries (WIFI_FAIL_BIT). The bits are set by event_handler() (see above) */
@@ -126,11 +123,9 @@ esp_err_t wifi_init_sta(void)
 		ret_value = ESP_FAIL;
 	}
 
-#if 0
 	/* The event will not be processed after unregister */
 	ESP_ERROR_CHECK(esp_event_handler_instance_unregister(IP_EVENT, IP_EVENT_STA_GOT_IP, instance_got_ip));
 	ESP_ERROR_CHECK(esp_event_handler_instance_unregister(WIFI_EVENT, ESP_EVENT_ANY_ID, instance_any_id));
-#endif
 	vEventGroupDelete(s_wifi_event_group);
 	return ret_value;
 }
@@ -372,14 +367,10 @@ void app_main(void)
 	ESP_ERROR_CHECK(ret);
 
 	// Initialize WiFi
-	wifi_init_sta();
+	ESP_ERROR_CHECK(wifi_init_sta());
 
 	// Obtain time over NTP
-	ret = obtain_time();
-	if(ret != ESP_OK) {
-		ESP_LOGE(TAG, "Fail to getting time over NTP.");
-		return;
-	}
+	ESP_ERROR_CHECK(obtain_time());
 
 #if 0
 	// Print current time
@@ -395,11 +386,7 @@ void app_main(void)
 	// Mount SPIFFS
 	char *partition_label = "storage";
 	char *base_path = "/spiffs"; 
-	ret = mountSPIFFS(partition_label, base_path);
-	if (ret != ESP_OK) {
-		ESP_LOGE(TAG, "mountSPIFFS fail");
-		while(1) { vTaskDelay(1); }
-	}
+	ESP_ERROR_CHECK(mountSPIFFS(partition_label, base_path));
 	printSPIFFS(base_path);
 	
 	// Read crontab
