@@ -38,13 +38,13 @@ static uart_obj_t uart_obj;
 
 static void tx_task(void *pvParameters)
 {
-	ESP_LOGI(pcTaskGetName(0), "Start");
+	ESP_LOGI(pcTaskGetName(NULL), "Start");
 	uart_obj.tx_len = 0;
 	while (1) {
 		ulTaskNotifyTake( pdTRUE, portMAX_DELAY );
-		ESP_LOGD(pcTaskGetName(0), "uart_obj.tx_len=%d", uart_obj.tx_len);
+		ESP_LOGD(pcTaskGetName(NULL), "uart_obj.tx_len=%d", uart_obj.tx_len);
 		int txBytes = uart_write_bytes(UART_NUM_1, uart_obj.tx_buf, uart_obj.tx_len);
-		ESP_LOGD(pcTaskGetName(0), "txBytes=%d", txBytes);
+		ESP_LOGD(pcTaskGetName(NULL), "txBytes=%d", txBytes);
 		assert(uart_obj.tx_len == txBytes);
 		uart_obj.tx_len = 0;
 		xTaskNotifyGive(uart_obj.parent_task_handle);
@@ -53,7 +53,7 @@ static void tx_task(void *pvParameters)
 
 static void rx_task(void *pvParameters)
 {
-	ESP_LOGI(pcTaskGetName(0), "Start");
+	ESP_LOGI(pcTaskGetName(NULL), "Start");
 	uart_obj.rx_len = 0;
 	uart_obj.rx_save_idx = 0;
 	uart_obj.rx_read_idx = 0;
@@ -64,19 +64,19 @@ static void rx_task(void *pvParameters)
 		if (rxBytes > 0) {
 			data[rxBytes] = 0;
 #if CONFIG_DEBUG_MODE
-			ESP_LOGI(pcTaskGetName(0), "Read %d bytes", rxBytes);
+			ESP_LOGI(pcTaskGetName(NULL), "Read %d bytes", rxBytes);
 #endif
-			//ESP_LOG_BUFFER_HEXDUMP(pcTaskGetName(0), data, rxBytes, ESP_LOG_INFO);
+			//ESP_LOG_BUFFER_HEXDUMP(pcTaskGetName(NULL), data, rxBytes, ESP_LOG_INFO);
 			for (int index=0; index<rxBytes; index++) {
 #if CONFIG_DEBUG_MODE
-				ESP_LOGI(pcTaskGetName(0), "data[%d]=0x%x", index, data[index]);
+				ESP_LOGI(pcTaskGetName(NULL), "data[%d]=0x%x", index, data[index]);
 #endif
 				uart_obj.rx_buf[uart_obj.rx_save_idx] = data[index];
 				uart_obj.rx_len++;
 				uart_obj.rx_save_idx++;
 				if (uart_obj.rx_save_idx == RX_BUF_SIZE) uart_obj.rx_save_idx = 0;
 			}
-			ESP_LOGD(pcTaskGetName(0), "uart_obj.rx_len=%d", uart_obj.rx_len);
+			ESP_LOGD(pcTaskGetName(NULL), "uart_obj.rx_len=%d", uart_obj.rx_len);
 		}
 	}
 	free(data);
