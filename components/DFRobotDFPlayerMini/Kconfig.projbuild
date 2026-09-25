@@ -20,7 +20,7 @@ menu "DFPlayerMini Configuration"
 
 	config DEBUG_MODE
 		bool "Enable Debug Mode"
-		default false
+		default n
 		help
 			Enable Debug Mode.
 
